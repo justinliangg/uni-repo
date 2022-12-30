@@ -1,0 +1,122 @@
+CLASS: Student
+
+CLASS FIELDS:
+
+name(String)
+studentID(int)
+mark(double)
+
+
+CONSTRUCTOR METHODS
+
+PARAMETER CONSTRUCTOR
+IMPORT: pName(String), pStudentID(integer), pMark(double)
+EXPORT: nil
+ALGORITHM:
+          IF(pName NOT EQUAL TO NULL AND  pName IS NOT BLANK) THEN
+            IF(pStudentID <= 99999999 AND pStudentID >= 10000000) THEN
+                IF(pMark>=0.0 AND pMark <= 100) THEN
+                                name = pName
+                                StudentID = pStudentID
+                                mark = pMark
+                name = error
+                studentID = 0
+                mark = 0.0    
+          ELSE 
+            name = error
+            studentID = 0
+            mark = 0.0
+            
+                 
+                        
+
+COPY CONSTRUCTOR
+IMPORT: pStudent(Student)
+EXPORT: nil
+ALGORITHM: 
+            name = pStudent.getName
+            studentID = pStudent.getStudentID
+            mark = pStudent.getMark
+
+Default Constructor
+IMPORT: nil
+EXPORT: nil
+ALGORITHM:
+           name = John
+           studentID = 10000000
+           mark = 50.0
+
+ACCESSOR METHODS
+
+ACCESSOR : getName
+IMPORT: nil
+EXPORT: name
+ALGORITHM:
+            RETURN name
+
+ACCESSOR: getStudentID
+IMPORT: nil
+EXPORT: studentID
+ALGORITHM:
+            RETURN studentID
+
+ACCESSOR: getMark
+IMPORT: nil
+EXPORT: mark
+ALGORITHM: 
+            RETURN mark
+
+MUTATOR METHODS
+
+MUTATOR: setName
+IMPORT: pName
+EXPORT: nil
+ALGORITHM
+            name = pName
+
+MUTATOR: setStudentID
+IMPORT: pStudentID
+EXPORT: nil
+ALGORITHM:
+            IF (pStudentID >= 10000000 && pStudentID <= 99999999) THEN
+                student = pStudentID
+            ELSE
+                TRY
+                    THROW ILLEGALARGUMENT EXCEPTION
+
+                CATCH(ILLEGALARGUMENT EXCEPTION)
+                    PRINT "WRONG VALUE FOR STUDENT ID"
+
+MUTATOR: setMark
+IMPORT: pMark
+EXPORT: nil
+ALGORITHM: 
+            IF(pMark <= 100 && pMark >= 0) THEN
+                mark = pMark
+            ELSE
+                TRY
+                    THROW ILLEGALARGUMENT EXCEPTION
+                CATCH(ILLEGALARGUMENT EXCEPTION)
+                    PRINT"WRONG VALUE FOR MARK"
+
+SUBMODULE: equals
+IMPORT: pObject(Object)
+EXPORT: isEqual (boolean)
+ALGORITHM: 
+            isEqual = FALSE
+            pStudent of CLASS Student = NULL
+            IF( pObject IS OF TYPE Student) THEN
+                pStudent = pObject CONVERTED TO TYPE Student
+                IF( name = pStudent.getName)
+                    IF( studentID = pStudent.getStudentID)
+                        IF(mark = pStudent.getMark)
+                            isEqual = TRUE
+
+            RETURN isEqual
+
+SUBMODULE : toString
+IMPORT: nil
+EXPORT studentString(String)
+ALGORITHM: 
+            PRINT name " + " studentID " + " + "mark"
+

@@ -1,0 +1,141 @@
+/*-------------------------------
+FILE: Location.txt
+Author: Justin Liang (19821986)
+UNIT: PDI
+COMMENTS: PSEUDOCODE for Location Class
+REQUIRES: NIL
+ --------------------------------*/
+
+CLASS: Location
+
+    CLASS FIELDS:
+    latitude(Real)
+    longitude(Real)
+    roadNumber(String)
+
+
+    CONSTRUCTOR METHODS
+
+    CONSTRUCTOR WITH PARAMETERS
+    IMPORT: pLatitude(Real), pLongitude(Real), pRoadNumber(String)
+    EXPORT: nil
+    ALGORITHM:
+                IF(pLatitude LESS THAN OR EQUAL TO 90.0 AND pLatitude GREATER THAN OR EQUAL TO -90.0) THEN
+                    IF(pLongitude LESS THAN OR EQUAL TO 180.0 AND pLongtiude GREATER THAN OR EQUAL TO -180.0) THEN
+                        IF(pRoadNumber IS NOT EMPTY AND pRoadNumber IS NOT NULL) THEN
+                            latitude = pLatitude
+                            longtitude = pLongitude
+                            roadNumber = pRoadNumber
+                END IF
+
+                ELSE
+                    latitude = 0.0
+                    longitude = 0.0
+                    roadNumber = 1
+                END ELSE
+
+    
+    COPY CONSTRUCTOR
+    IMPORT: pLocation(Location)
+    EXPORT: nil
+    ALGORITHM:
+                latitude = pLocation.getLatitude
+                longitude = pLocation.getLongitude
+                roadNumber = pLocation.getRoadNumber
+
+    DEFAULT CONSTRUCTOR
+    IMPORT: nil
+    EXPORT: nil
+    ALGORITHM:
+                latitude = 0.0
+                longitude = 0.0
+                roadNumber = 1
+
+
+
+
+    ACCESSOR METHODS
+    
+    ACCESSOR: getLatitude
+    IMPORT: nil
+    EXPORT: latitude(Real)
+    ALGORITHM:
+                RETURN latitude
+                    
+    ACCESSOR: getLongitude
+    IMPORT: nil
+    EXPORT: longitude(Real)
+    ALGORITHM:
+                RETURN longitude
+    ACCESSOR: getRoadNumber
+    IMPORT: nil
+    EXPORT: roadNumber(String)
+    ALGORITHM:
+                RETURN roadNumber
+
+
+
+
+    MUTATOR METHODS
+
+    MUTATOR: setLatitude
+    IMPORT: pLatitude(Real)
+    EXPORT: nil
+    ALGORITHM:
+                IF(pLatitude LESS THAN OR EQUAL TO 90.0 AND pLatitude GREATER THAN OR EQUAL TO -90.0) THEN
+                    latitude = pLatitude
+                END IF
+
+    MUTATOR: setLongitude
+    IMPORT: pLongitude(Real)
+    EXPORT: nil
+    ALGORITHM:
+                IF(pLongitude LESS THAN OR EQUAL TO 180.0 AND pLongitude GREATER THAN OR EQUAL TO -180.0) THEN
+                    longitude = pLongitude
+                END IF
+
+    MUTATOR: setRoadNumber
+    IMPORT: pRoadNumber
+    EXPORT: nil
+    ALGORITHM: 
+                IF(pRoadNumber IS NOT EMPTY AND pRoadNumber IS NOT NULL) THEN
+                    roadNumber = pRoadNumber
+                END IF
+
+
+
+
+    SUBMODULE: equals
+    IMPORT: pObject(Object)
+    EXPORT: isEqual(Boolean)
+    ASSERTION: checks if two objects of type Location are equal
+    ALGORITHM:
+                isEqual = FALSE
+                inLocation OF CLASS Location = NULL
+
+                IF(pObject IS OF TYPE Location) THEN
+                    inLocation = (CONVERTED TO TYPE Location) pObject
+                    IF(longitude EQUALS inLocation.getLongitude) THEN
+                        IF(latitude EQUALS inLocation.getLatitude) THEN
+                            IF(roadNumber EQUALS inLocation.getRoadNumber) THEN
+                                isEqual = TRUE
+                
+                END IF 
+
+                RETURN isEqual
+
+
+
+
+    SUBMODULE: toString
+    IMPORT: nil
+    EXPORT: locationString(String)
+    ASSERTION: returns values in class fields as strings
+    ALGORITHM:
+                locationString = "Latitude: " + latitude + "\nLongitude: " + longitude + "\nRoadNumber: " + roadNumber
+                RETURN locationString
+
+
+
+
+END Location CLASS

@@ -1,0 +1,8 @@
+David McMeekin,10000001,20.0
+Christopher Lee,12345678,54.0
+Christopher Lee,12345678,54.0
+John,19821987,56.5
+Oliver Stewart,18649532,70.8
+Oliver Stewart,18649532,75.8
+Justin Liang,19821986,84.65
+David McMeekin,10000001,100.0

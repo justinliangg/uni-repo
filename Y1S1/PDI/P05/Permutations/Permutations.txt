@@ -1,0 +1,40 @@
+BEGIN MAIN
+
+	n= ASK USER WITH PROMPT "Please enter a number for the elements in a set"
+	r = ASK USER WITH PROMPT" Please enter the number of elements you wish to select from the set" 
+	
+	arrayLength = r TAKE 1 
+ 	CREATE ARRAY WITH NAME array SIZE arrayLength
+	
+	FOR(i EQUAL 0 to r - 1, INCREMENT i BY 1)
+		array[i] = nFactorial(n)/NminusRFactorial(n,i)
+		System.out.print(array[i] + "\t" );
+: 
+
+
+
+
+
+
+
+
+
+
+SUBMODULE: nFactorial
+IMPORT: nValue(Int)
+EXPORT: nFactorial(Int)
+ASSERTION: To produce a value for n!
+
+ALGO:  	 nFactorial = 1 
+	 FOR(i=1 TO nValue INCREMENT BY 1)
+		nFactorial = nFactorial x i 
+	ENDFOR
+	RETURN nFactorial
+
+SUBMODULE:NminusRFactorial
+IMPORT:n(Int),r(Int)
+EXPORT:n-(2+i)factorial
+ASSERTION: To produce a value for n-(2+i)factorial   
+ALGO: nFactorial=1
+	For(i=1 to (n-(2+i)) INCREMENT BY 1)
+		nFactorial = nFactorial x i

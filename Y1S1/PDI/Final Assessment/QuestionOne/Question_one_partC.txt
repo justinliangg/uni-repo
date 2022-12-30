@@ -1,0 +1,104 @@
+/*-------------------------------
+  FILE: Question_one_partC.txt
+  Author: Justin Liang (19821986)
+  UNIT: PDI
+  COMMENTS: Pseudocode for Question 1c)   
+--------------------------------*/
+
+BEGIN Question_one_partD
+
+    BEGIN MAIN
+    
+        arrIntegers = CALL(getInput)
+
+        sum = CALL(sumOfIntegers) <- arrIntegers
+
+        average = CALL(averageOfIntegers) <- sum
+        
+        PRINT("\nSum of The Integers: " + sum)
+        PRINT("Average of the integers: " + average)
+
+    END MAIN
+
+
+
+    
+    SUBMODULE: averageOfIntegers
+    IMPORT: pSum(Integer)
+    EXPORT: inAverage(Real number)
+    ASSERTION: Calculate the average of the 10 integers using pSum
+               Return average
+    ALGORITHM:
+                inAverage = pSum (CONVERTED TO TYPE REAL NUMBER) / 10
+                
+                RETURN inAverage
+
+
+
+
+    SUBMODULE: sumOfIntegers
+    IMPORT: pArrIntegers(Array of Integers)
+    EXPORT: inSum(Integer)
+    ASSERTION: get the sum of integers from pArrIntegers and return it
+    ALGORITHM:
+                FOR( i EQUAL 0 TO LENGTH OF pArrIntegers - 1, INCREMENT i BY 1)
+                    
+                    inSum = inSum + pArrIntegers[i]
+                    
+                END FOR
+
+                RETURN inSum
+
+
+
+
+    SUBMODULE: getInput
+    IMPORT: nil
+    EXPORT: inArrIntegers(Array of Integers)
+    ASSERTION: Create an array of integers of size 10
+               Get user input for each element of the array
+               Return the array
+    ALGORITHM:
+                inArrIntegers = CREATE AN ARRAY OF INTEGERS OF SIZE 10
+                
+                PRINT("")
+                PRINT("Please enter 10 Even Integers\n")
+
+                FOR(i EQUAL TO 0 TO LENGTH OF inArrIntegers - 1, INCREMENT i BY 1)
+                    
+                    inArrIntegers[i] = CALL(userInput) <- i
+                
+                END FOR 
+
+                return inArrIntegers
+
+
+
+
+    SUBMODULE: userInput
+    IMPORT: elementNum(Integer)
+    EXPORT: input(Integer)
+    ASSERTION: get user input for an even integer
+    ALGORITHM: 
+                integerNum = elementNum + 1
+
+                input = 1
+                DO
+                    TRY
+                        PRINT("Integer " + integerNum + ": ")
+                        input = GET USER INPUT FOR AN INTEGER
+
+                        IF(REMAINDER OF input/2 DOES NOT EQUAL 0) THEN
+                            PRINT("Please enter only even integers\n")
+                        END IF
+
+                    CATCH(USER INPUTS A NON-INTEGER)
+                    END TRY-CATCH
+
+                WHILE(REMAINDER OF input/2 DOES NOT EQUAL 0)
+                END DO-WHILE
+
+                RETURN input
+
+
+END Question_one_partD

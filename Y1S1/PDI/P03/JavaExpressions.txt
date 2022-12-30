@@ -1,0 +1,12 @@
+String hello=  "World";
+double x = 314.219 , y = 240.213;
+int mill= 1999 .eng = 201. cap=9
+
+
+a) (int)x - mill/100
+
+314 - 1999/100
+314 - 19.9 
+294.1
+
+b)

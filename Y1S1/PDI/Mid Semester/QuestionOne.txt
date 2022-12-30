@@ -1,0 +1,243 @@
+BEGIN QuestionOne
+/* NAME : Justin Liang
+   ID : 19821986
+*/   
+
+    BEGIN MAIN
+        
+        DO  
+            TRY 
+                CALL(menuDisplay)
+
+                choice  = ALLOW USER INPUT FOR CHOICE IN menuDisplay
+
+                IF choice EQUAL TO 1 THEN
+                    CALL(welcomeMessage)
+
+                ELSE IF choice EQUAL TO 2 THEN
+                    CALL (appExplanation)
+
+                ELSE IF choice EQUAL TO 3 THEN
+    
+		            PRINT"Converting DD to DMS"
+                    arrayLength = CALL(numOfConversions)
+                    convertedDMSValues = CALL(deciDegToDegMinSec)
+                    CALL(displayValuesForDMS)
+                    
+                ELSE IF choice EQUAL TO 4 THEN
+
+		            PRINT"Converting DMS to DD"
+                    arrayLength = CALL(numOfConversions) 
+                    convertedDDValues = CALL(degMinSecToDeciDeg)
+                    CALL(displayValuesForDD)
+        
+                ELSE IF choice EQUAL TO 5 THEN
+                    PRINT "YOU HAVE EXITED THE PROGRAM!"
+            
+                ELSE 
+                    PRINT" PLEASE ENTER ONLY VALUES BETWEEN 1 TO 5!"
+            
+                END IF
+            
+            CATCH (WHEN USER ENTERS A NON-INTEGER INPUT)
+    
+            END TRY-CATCH
+
+        WHILE choice DOES NOT EQUAL 5
+        END DO-WHILE                                                                                                                        
+    END MAIN
+
+SUBMODULE : menuDisplay
+IMPORT: unit1(String) , unit2(String)
+EXPORT : nil
+ASSERTION : To print a display for the menu for user to select. Allow imported variables to change the type of units being converted.
+ALGORITHM: PRINT AND GO TO NEXT LINE AFTER EACH MESSAGE
+             "1. Welcome Message"
+             "2. How to use the app"
+             "3. Convert " +  unit1 + " TO " + unit2          
+             "4. Convert " unit2 " TO " unit1
+             "5. Exit"  
+
+SUBMODULE: welcomeMessage
+IMPORT: modifDates(String)
+EXPORT: nil
+ASSERTION: print welcome message for user
+ALGORITHM: PRINT AND GO TO NEXT LINE AFTER EACH MESSAGE
+             " Welcome to the Converter for Decimal Degrees!"
+             " Convert from decimal degrees to degrees,minutes and seconds and vice versa!" 
+             " AUTHOR : Justin Liang 19821986"
+             " CREATION DATE: 17/04/2021"
+             " MODIFICATION DATES: " modifDates 
+
+SUBMODULE: appExplanation
+IMPORT: nil
+EXPORT: nil
+ASSERTION : print instructions on how to use the app
+ALGORITHM: PRINT AND GO TO NEXT LINE AFTER EACH MESSAGE
+            "1) Select which type of conversion (3 or 4) you would like to make from the menu"
+            "2) Enter a number for how many conversions you want to make"
+            "3) Enter values for the conversions"
+            "The Converter will then display the converted values in the order that you have entered the values"  
+            "You can then exit the program by pressing 5 in the menu or convert more values again by repeating steps 1 to 3" 
+
+SUBMODULE: numOfConversions
+IMPORT: nil 
+EXPORT: arrayLength(Integer)
+ASSERTION: get user input for how many conversions they would like to make
+ALGORITHM: 
+           DO
+                TRY 
+                    arrayLength = ASK USER WITH PROMPT "Please enter the number of conversions you would like to make" 
+
+                CATCH(WHEN USER INPUT IS NOT AN INTEGER)
+
+                    PRINT "Please enter only integers!"
+                END TRY-CATCH
+
+                IF(arrayLength LESS THAN OR EQUAL TO 0)
+                    PRINT"Value need to be greater than 0
+                ENDIF
+        
+           WHILE(arrayLength IS LESS THAN OR EQUAL TO 0)
+           END DO-WHILE   
+           RETURN arrayLength        
+
+SUBMODULE : deciDegToDegMinSec
+IMPORT: pArrayLength(Integer)
+EXPORT: array(String)
+ASSERTION : get user input for the decimal degrees values used for conversions and convert them, and store them in an array
+ALGORITHM: 
+            array = CREATE AN ARRAY OF STRINGS WITH SIZE OF arrayLength
+
+            FOR (i EQUAL 0 TO arrayLength , INCREMENT i BY 1)
+                 DO 
+                    TRY 
+                        deciDeg = ASK USER WITH PROMPT "Value " i+1 ": "
+                    CATCH(WHEN USER INPUT IS NOT A DOUBLE OR INTEGER)
+                        PRINT "Please enter only decimals!"
+                    END TRY-CATCH
+
+            WHILE(deciDeg EQUAL TO 0)
+            END DO-WHILE
+    
+            degrees = GET ONLY THE INTEGER OF deciDeg
+            minutes = (deciDeg MINUS degrees OF TYPE DOUBLE) MULTIPLY BY 60
+            integerMinutes= GET ONLY INTEGER FROM minutes    
+            seconds = (minutes MINUS integerMinutes OF TYPE DOUBLE) MULTIPLY BY 60      
+            roundSeconds = ROUND SECONDS TO THREE DECIMAL PLACES
+            
+            IF(deciDeg LESS THAN 0) THEN
+                array [i] = "-" ABSOLUTE VALUE OF degrees"°" + " " + ABSOLUTE VALUE OF integerMinutes"'" + " " + ABSOLUTE VALUE OF seconds"""
+            ELSE
+                array [i] = degrees"°" + " " + integerMinutes"'" + " " + seconds"""
+            
+            END IF
+
+            END FOR
+            RETURN array
+            
+SUBMODULE : degMinSecToDeciDeg 
+IMPORT: pArrayLength(Integer)
+EXPORT:array(double)
+ASSERTION : get user input for values of degrees,minutes and seconds and covert them to decimal degree. Store them in an array
+ALGORITHM:
+            array = CREATE AN ARRAY OF DOUBLES WITH SIZE OF arrayLength
+
+            FOR(i EQUAL 0 TO arrayLength, INCREMENT i BY 1)
+                PRINT "Value " +(i PLUS 1)
+                DO
+                    TRY
+                        decimal = ASK USER WITH PROMPT "Decimal: "
+                    CATCH(WHEN USER INPUT IS NOT A INTEGER))
+                        "Please enter only integers"
+                    END TRY-CATCH
+                WHILE(decimal GREATER THAN 3600 or decimal LESS THAN -3600)
+                END DO-WHILE
+                
+                DO
+                    TRY
+                        minutes = ASK USER WITH PROMPT "Minutes: "
+                    CATCH(WHEN USER INPUT IS NOT A DOUBLE OR INTEGER)
+                        "Please enter only numbers!"
+                    END TRY-CATCH
+		
+		    IF(minutes LESS THAN 0 or GREATER THAN 60) THEN
+			PRINT"Value needs to be between 0 and 60"
+		    END IF
+		
+                WHILE(minutes LESS THAN 0 or GREATER THAN 60)
+                END DO-WHILE
+
+                DO  
+                    TRY            
+                        seconds = ASK USER WITH PROMPT "Seconds: "
+                    CATCH(WHEN USER INPUT IS NOT A INTEGER OR DOUBLE)
+                        "Please enter only numbers!"
+
+		    IF(seconds LESS THAN 0 and GREATER THAN 60) THEN
+			PRINT"Value needs to be between 0 and 60"
+			
+		    END IF	
+
+                WHILE(seconds LESS THAN 0 OR GREATER THAN 60)
+                END DO-WHILE
+    
+                valueMinutes = minutes DIVIDE BY 60
+                valueSeconds = seconds DIVIDE BY 60
+                
+                IF(decimal LESS THAN 0) THEN
+                    deciDegrees = decimal CONVERTED TO TYPE DOUBLE MINUS valueMinutes MINUS valueSeconds
+                ELSE
+                    deciDegrees = decimal CONVERTED TO TYPE DOUBLE PLUS valueMinutes PLUS valueSeconds
+
+                roundDeciDegrees = ROUND deciDegrees TO THREE DECIMAL PLACES
+                array[i] = roundDeciDegrees
+    
+            END FOR
+            RETURN array
+
+SUBMODULE:displayValuesForDMS
+IMPORT:pArrayLength(Integer),pArray(String)
+EXPORT: nil
+ASSERTION: display all converted values for Degree Decimals to DMS
+ALGORITHM:  
+	        PRINT"Converting DD to DMS Results"
+            FOR(i EQUAL 0 to pArrayLength, INCREMENT i BY 1)
+                PRINT pArray[i] 
+                PRINT A NEW LINE
+
+            END FOR     
+
+SUBMODULE:displayValuesForDD
+IMPORT:pArrayLength(Integer),pArray(Double)
+EXPORT: nil
+ASSERTION: display all converted values for DMS to Degree Decimals
+ALGORITHM:
+	        PRINT"Converting DMS to DD Results"
+            FOR(i EQUAL 0 to pArrayLength, INCREMENT i BY 1)
+                PRINT pArray[i] 
+                PRINT A NEW LINE
+
+            END FOR     
+
+
+END QuestionOne
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

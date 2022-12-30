@@ -1,0 +1,50 @@
+BEGIN MAIN
+
+choice = ASK USER WITH PROMPT "Please Select either 1) Subtraction or 2) Addition 
+
+numElements = CALL(intInput)
+
+digit1 = CALL(intInput)
+digit2 = CALL(intInput)
+int array[] = new int [numElements]
+IF choice EQUAL 2
+FOR (i=2 TO  numElements 
+	n3 = digit1+digit2
+	array[i] = n3
+	n3 = digit1
+	digit2 =digit1 	
+	
+ENDFOR
+
+ELSE 
+FOR (i=2 to numElements i++
+	n3 = digit1-digit2
+	array[i] = n3
+	n3 = digit1
+	digit2 = digit1
+ENDFOR
+ENDIF
+
+choice2 = ASK USER WITH PROMPT "Would you like to 1)view an element 2)view entire sequence"
+
+
+
+
+
+
+
+
+
+
+
+SUBMODULE:intInput
+IMPORT:value1(Int),value2(Int),String
+EXPORT: userInput
+ASSERTION: To obtain the user input between value1 and value2
+ALGORITHMN: 	INITIALISE userInput
+		DO
+		userInput= ASK USER WITH PROMPT" Please enter a value between " value1 AND value2 AND String
+		WHILE(userInput IS LESS THAN value1 OR GREATER THAN value2)
+
+		
+

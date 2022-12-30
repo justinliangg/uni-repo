@@ -1,0 +1,7 @@
+BEGIN Converter
+MAIN: 
+celcius <- ASK USER WITH PROMPT "Insert in degrees Celcius"
+
+fahrenheit <- 9/5 * celcius + 32
+PRINT "Fahrenheit= "fahrenheit
+

@@ -1,0 +1,19 @@
+/*-------------------------------
+FILE: Question_one_partA.txt
+Author: Justin Liang (19821986)
+UNIT: PDI
+COMMENTS: Question 1a Pseudocode
+--------------------------------*/
+
+BEGIN MAIN
+
+    DO
+        INPUT age
+
+        IF(age LESS THAN OR EQUAL TO 0) THEN
+            
+            PRINT "Age is not valid!"
+
+    WHILE(age LESS THAN OR EQUAL TO 0)
+
+END MAIN

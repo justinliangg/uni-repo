@@ -1,0 +1,12 @@
+BEGIN MAIN
+
+arrayRows = ASK USER FOR INPUT WITH PROMPT "Please enter array row"
+arrayColumns = ASK USER FOR INPUT WITH PROMPT "Please enter array column"
+
+int array[][] = new int [arrayRows][arrayColumns]
+
+FOR i=0 to arrayRows INCREMENT i BY 1
+
+	FOR j=0 to arrayColumns INCREMENT j BY 1
+	
+		int array[i][j] = i MULTIPLY j 

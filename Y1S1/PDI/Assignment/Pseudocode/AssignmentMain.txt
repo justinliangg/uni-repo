@@ -1,0 +1,860 @@
+
+/**********************
+FILE: AssignmentMain.txt
+Name: Justin Liang
+ID :19821986
+UNIT: PDI
+COMMENTS: PSEUDOCODE FOR AssignmentMain
+**********************/
+
+
+BEGIN AssignmentMain
+    
+    BEGIN MAIN 
+        
+        LOCATION_DATA(CONSTANT OF TYPE INTEGER) = 1
+        GENERAL_DATA(CONSTANT OF TYPE INTEGER) = 2
+        EXIT(CONSTANT OF TYPE INTEGER) = 3 
+        
+        numAccidents = CALL(sizeOfArray)
+        arrAccidents = CREATE AN ARRAY OF Accident TYPE OF SIZE numAccidents
+        arrLocations = CREATE AN ARRAY OF Location TYPE OF SIZE numAccidents
+
+	    IF(numAccidents GREATER THAN 0)
+        
+	        choice = 0
+            WHILE(choice DOES NOT EQUAL EXIT)
+                PRINT("----------------------------------------------------------------------------"
+                      + "----------------------------------");
+            
+	            arrLocations = CALL(fileRead) <- arrLocations 
+                arrAccidents = CALL(fileRead) <- arrAccidents, arrLocations
+
+           
+                CALL(menuDisplay) <- numAccidents
+                choice = CALL(menuUserInput)
+            
+                IF(choice EQUAL TO LOCATION_DATA) THEN       
+                    CALL(locationData) <- arrLocations, arrAccidents
+
+                ELSE IF(choice EQUAL TO GENERAL_DATA) THEN
+                    choice2 = CALL(option2Menu)
+                    CALL(runUserOption) <- choice2, arrAccidents
+
+                ELSE IF(choice EQUAL TO EXIT) THEN
+                    PRINT("YOU HAVE EXITED THE PROGRAM")
+
+                ELSE
+                    PRINT("Please enter numbers 1 to 3 only")
+            
+                END IF
+
+            END WHILE
+	
+        ELSE
+	    PRINT("Crash_Information_(Last_5_Years).csv File Missing!")
+
+
+    END MAIN 
+    
+ 
+    SUBMODULE: sizeOfArray
+    IMPORT: nil
+    EXPORT: rows(Integer)
+    ASSERTION: go through the csv file and count number of valid rows in the file. Return the number
+    ALGORITHM:
+                fileName = "Crash_Information_(Last_5_Years).csv"
+                
+                rows = 0
+                TRY
+                    fileInput = OPENFILE fileName
+                    line = READ LINE FROM fileInput
+                    
+                    WHILE(line IS NOT NULL)
+                        column = CALL(processLine) <- line
+
+                        IF(NOT CALL(empty) <- column) THEN
+                            TRY
+                                longitude = CONVERT column[0] TO TYPE REAL NUMBER
+                                latitude = CONVERT column[1] TO TYPE REAL NUMBER
+                                roadNumber = column[4] 
+                                
+                                id = column[3]
+                                date = column[13]
+                                time = column[14]
+                                severity = column[15]
+                                roadName = column[5]
+                                intersectionNumber = column[9]
+                                eventNature = column[16]
+
+                                IF(longitude GREATER THAN OR EQUAL TO -180 AND longitude LESS THAN OR EQUAL TO 180) THEN
+                                    
+                                    IF(latitude GREATER THAN OR EQUAL TO -90 AND latitude LESS THAN OR EQUAL TO 90) THEN
+                                        
+                                        INCREMENT rows BY 1                    
+                                
+                                END IF
+
+                            CATCH(STRING CANNOT BE CONVERTED TO REAL NUMBER OR INTEGER)
+                            END TRY-CATCH
+
+                        END IF
+
+                        line = READ LINE FROM fileInput
+                    
+                    END WHILE
+
+                    CLOSEFILE fileInput
+                
+                CATCH(I/O EXCEPTION)
+                    
+                    IF(fileInput IS NOT NULL)
+                        
+                        TRY
+                            CLOSEFILE fileInput
+                        CATCH(I/O EXCEPTION)
+                        END TRY-CATCH
+                    
+                    END IF
+
+                END TRY-CATCH    
+                
+                RETURN rows
+
+
+
+
+    SUBMODULE: fileRead
+    IMPORT: pArrLocations(Array of Location)
+    EXPORT: pArrLocations(Array of Location)
+    ASSERTION: read a file and store values into pArrLocations and return pArrLocations
+    COMMENTS: pArrLocations and pArrAccidents will both be altered in the function
+    ALGORITHM:
+                fileName = "Crash_Information_(Last_5_Years).csv"
+                
+                elementNum = 0
+                TRY
+                    fileInput = OPENFILE fileName
+                    line = READ LINE FROM fileInput
+                    
+                    WHILE(line IS NOT NULL
+                        column = CALL(processLine) <- line
+
+                        IF(NOT CALL(empty) <- column) THEN
+                            TRY
+                                longitude = CONVERT column[0] TO TYPE REAL NUMBER
+                                latitude = CONVERT column[1] TO TYPE REAL NUMBER
+                                roadNumber = column[4] 
+                                    
+                                    IF(longitude GREATER THAN OR EQUAL TO -180 AND longitude LESS THAN OR EQUAL TO 180) THEN
+
+                                        IF(latitude GREATER THAN OR EQUAL TO -90 AND latitude LESS THAN OR EQUAL TO 90) THEN
+                                        
+                                            pArrLocations[elementNum] = CONSTRUCT Location USING latitude, longitude 
+                                                                        AND roadNumber
+            
+                                            INCREMENT elementNum BY 1
+                                END IF
+
+                            CATCH(STRING CANNOT BE CONVERTED TO REAL NUMBER OR INTEGER)
+                            
+                            END TRY-CATCH
+
+                        END IF
+                        line = READ LINE FROM fileInput
+                    END WHILE
+
+                    CLOSEFILE fileInput
+
+                CATCH(I/o EXCEPTION)
+                    
+                    IF(fileInput IS NOT NULL)
+                        
+                        TRY
+                            CLOSEFILE fileInput
+                        CATCH(I/O EXCEPTION)
+                        END TRY-CATCH
+                    
+                    END IF
+
+                END TRY-CATCH    
+            
+            END TRY-CATCH
+
+            RETURN pArrLocations
+
+
+
+
+    SUBMODULE: fileRead
+    IMPORT: pArrAccidents(Array of Accident), pArrLocations(Array of Location)
+    EXPORT: pArrAccidents(Array of Accident)
+    ASSERTION: read a file and store values into pArrAccidents, return pArrAccidents
+    ALGORITHM:
+                fileName = "Crash_Information_(Last_5_Years).csv"
+                
+                elementNum = 0
+                TRY
+                    fileInput = OPENFILE fileName
+                    line = READ LINE FROM fileInput
+                    
+                    WHILE(line IS NOT NULL)
+                        column = CALL(processLine) <- line
+
+                        IF(NOT CALL(empty) <- column) THEN
+                            TRY
+                                longitude = CONVERT column[0] TO TYPE REAL NUMBER
+                                latitude = CONVERT column[1] TO TYPE REAL NUMBER
+                                
+                                id = column[3]
+                                date = column[13]
+                                time = column[14]
+                                severity = column[15]
+                                roadName = column[5]
+                                intersectionNumber = column[9]
+                                eventNature = column[16]
+
+                                IF(longitude GREATER THAN OR EQUAL TO -180 AND longitude LESS THAN OR EQUAL TO 180) THEN
+                                    
+                                    IF(latitude GREATER THAN OR EQUAL TO -90 AND latitude LESS THAN OR EQUAL TO 90) THEN
+                                        
+                                        pArrAccidents[elementNum] = CONSTRUCT Accident USING id, date, time, severity
+                                                                                             , roadName, intesectionNumber
+                                                                                             , eventNature 
+                                                                                             AND pArrLocations[elementNum] 
+                                        
+                                        INCREMENT elementNum BY 1
+                                END IF
+
+                            CATCH(STRING CANNOT BE CONVERTED TO REAL NUMBER OR INTEGER)
+                            
+                            END TRY-CATCH
+
+                        END IF
+                        line = READ LINE FROM fileInput
+                    END WHILE
+
+                    CLOSEFILE fileInput
+
+                CATCH(I/o EXCEPTION)
+                    
+                    IF(fileInput IS NOT NULL)
+                        
+                        TRY
+                            CLOSEFILE fileInput
+                        CATCH(I/O EXCEPTION)
+                        END TRY-CATCH
+                    
+                    END IF
+
+                END TRY-CATCH  
+
+              END TRY-CATCH
+
+              RETURN pArrAccidents
+
+
+
+
+    SUBMODULE: empty
+    IMPORT: pColumn(Array of Strings)
+    EXPORT: isEmpty(Boolean)
+    ASSERTION: Imports pColumn and checks if any elements used for accident and location constructors are blank
+    ALGORITHM:
+                isEmpty = TRUE
+                IF(pColumn[0] DOES NOT EQUAL "" AND pColumn[0] IS NOT NULL) THEN
+                    IF(pColumn[1] DOES NOT EQUAL "" AND pColumn[1] IS NOT NULL) THEN 
+                        IF(pColumn[3] DOES NOT EQUAL "" AND pColumn[3] IS NOT NULL) THEN
+                            IF(pColumn[4] DOES NOT EQUAL "" AND pColumn[4] IS NOT NULL) THEN
+                                IF(pColumn[5] DOES NOT EQUAL "" AND pColumn[5] IS NOT NULL) THEN
+                                    IF(pColumn[9] DOES NOT EQUAL "" AND pColumn[9] IS NOT NULL) THEN
+                                        IF(pColumn[13] DOES NOT EQUAL "" AND pColumn[13] IS NOT NULL) THEN
+                                            IF(pColumn[14] DOES NOT EQUAL "" AND pColumn[14] IS NOT NULL) THEN
+                                                IF(pColumn[15] DOES NOT EQUAL "" AND pColumn[15] IS NOT NULL) THEN
+                                                    IF(pColumn[16] DOES NOT EQUAL "" AND pColumn[16] IS NOT NULL) THEN
+                                                        isEmpty = FALSE
+                END IF
+
+                RETURN isEmpty
+
+
+
+
+    SUBMODULE: processLine
+    IMPORT: pRow(String)
+    EXPORT: inColumn(Array of Strings)
+    ASSERTION: split pRow every ",", store each elements seperated in inColumn
+               export inColumn
+    ALGORITHM:
+                inColumn = SPLIT pRow AT EVERY ","
+                RETURN inColumn 
+
+
+
+
+    SUBMODULE : menuDisplay
+    IMPORT: pNumAccidents(Integer)
+    EXPORT : nil
+    ASSERTION : Display MENU screen      
+    ALGORITHM: 
+
+                PRINT AND GO TO NEXT LINE AFTER EACH MESSAGE
+
+                "Welcome to the Main Roads WA crash data program. There are a
+total of " + pAccidents + "accidents within this dataset."
+                "Please make a selection from the Menu below."
+                "1. Examine data in relationship to a specified location."
+                "2. Examine the data generally."
+                "3. Exit Program"
+ 
+
+
+
+    SUBMODULE: menuUserInput
+    IMPORT: nil
+    EXPORT: inChoice(Integer)
+    ASSERTION: get user input for the menu and returns the choice
+    ALGORITHM:
+                PRINT A BLANK LINE
+
+                TRY        
+                    
+                    inChoice = 0
+                    inChoice = GET USER INPUT
+
+                CATCH(WHEN USER ENTERS A NON INTEGER)
+                    
+                    PRINT("Please only enter integers")
+
+                END TRY CATCH
+
+                RETURN inChoice
+
+
+
+
+    SUBMODULE: locationData
+    IMPORT: pArrLocations(Array of Location), pArrAccidents(Array of Accident)  
+    EXPORT: nil
+    ASSERTION: get user input, calculate the distances between the user location and the location in the data. 
+               Sort the data and then display the results
+    ALGORITHM:
+                PRINT("----------------------------------------------------------------------------"
+                      + "----------------------------------");
+         
+                PRINT("The following details are required: Location Latitude, location longitude and Location name. \n")
+
+                locationName = CALL(inputString) <- "Location Name"
+                userLongitude = CALL(inputDouble) <- "Longitude", -180.0, 180
+                userLatitude = CALL(inputDouble) <- "Latitude", -90.0, 90
+
+                arrDistance = CALL(createArrDist) <- pArrLocations, userLongitude, userLatitude
+
+                sortedArrAccidents = CALL(insertionSort) <- arrDistance, pArrAccidents
+                sortedArrDistance = CALL(insertionSort) <- arrDistance
+                
+                PRINT A BLANK LINE
+                CALL(displayResults) <- sortedArrDistance, sortedArrAccidents, locationName
+
+
+
+
+    SUBMODULE: inputString
+    IMPORT: stringName(String)
+    EXPORT: userInput(String)
+    ASSERTION: get a user input for a string
+    ALGORITHM:
+                DO
+                    userInput = ASK USER WITH PROMPT(stringName + ": ")
+                WHILE(userInput EQUAL TO "" OR FIRST CHARACTER OF userInput EQUALS TO A SPACE)
+                END DO-WHILE
+            
+                RETURN userInput
+
+
+
+
+    SUBMODULE: inputDouble
+    IMPORT: valueName(String), minValue(Real number), maxValue(Real number)
+    EXPORT: userInput(Real number)
+    ASSERTION: Get userInput, validate user input so that is between minValue and maxValue. 
+    ALGORITHM:
+                userInput = maxValue + 1
+                WHILE(userInput GREATER THAN maxValue OR userInput LESS THAN minValue)
+                    
+                    TRY
+                        userInput = ASK USER WITH PROMPT (valueName + ": ")
+                        
+                        IF(userInput GREATER THAN maxValue OR userInput LESS THAN minValue) THEN
+                            PRINT("Please enter a number between " + minValue + " and " + maxValue + " only ")
+                        END IF
+
+                    CATCH(WHEN USER INPUTS A NON-INTEGER INPUT)
+                        PRINT("Please only enter real numbers")
+
+                    END TRY CATCH
+
+                END WHILE
+
+                RETURN userInput
+
+
+
+
+    SUBMODULE: createArrDist
+    IMPORT: pArrLocations(Array of Location), pUserLongitude(Real Number), pUserLatitude(Real number)
+    EXPORT: arrDistance(Array of Real Numbers)
+    ASSERTION: Calculate distance between user location and locations in pArrLocations. 
+               Stores the distances in the array arrDistance.
+    ALGORITHM: 
+                arrDistance = CREATE AN ARRAY OF REAL NUMBERS OF SIZE (LENGTH OF pArrLocations)
+                FOR( i EQUALS 0 TO LENGTH OF arrDistance - 1, INCREMENT i BY 1)
+                    
+                    distance = CALL(haverSineDistance) <- pUserLatitude, pUserLongitude, pArrLocations[i].getLatitude
+                                                          , pArrLocations[i].getLongitude 
+
+                    arrDistance[i] = ROUND distance TO THREE DECIMAL PLACES
+
+                END FOR
+                
+                RETURN arrDistance
+
+
+
+
+    SUBMODULE: haverSineDistance
+    IMPORT: lat1(Real), lon1(Real), lat2(Real), lat2(Real)
+    EXPORT: distance(Real)
+    ASSERTION: Calculate distance between two coordinates
+    ALGORITHM: 
+                EARTHRADIUS (CONSTANT OF TYPE INTEGER) = 6371 // 
+                latDistance OF TYPE REAL = convertToRadians(lat2 - lat1)
+                lonDistance OF TYPE REAL = convertToRadians(lon2 - lon1)
+                a OF TYPE REAL = (Math.sin(latDistance / 2) * Math.sin(latDistance / 2)) + (Math.cos(convertToRadians(lat1)) * Math.cos(convertToRadians(lat2)) * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2))
+                c OF TYPE REAL = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
+                distance OF TYPE REAL = EARTHRADIUS * c
+                
+                RETURN distance
+
+
+
+
+    SUBMODULE: convertToRadians
+    IMPORT: value(Real)
+    EXPORT: radValue(Real)
+    ASSERTION: Convert degrees to radians
+    ALGORITHM:
+                radValue OF TYPE REAL = value * Math.pi/180
+                RETURN radValue
+ 
+
+
+
+    SUBMODULE: insertionSort
+    IMPORT: pArrDistance(Array of Real numbers), pArrAccidents(Array of Accident)
+    EXPORT: pArrAccidents(Array of Accident)
+    ASSERTION: sort distances in pArrDistance into ascending order and sort pArrAccidents according to pArrDistance as well
+               return pArrAccidents
+    ALGORITHM:
+                FOR(i = 1 TO LENGTH OF pArrAccidents - 1, INCREMENT i BY 1
+                    
+                    currentDist = pArrDistance[i]
+                    currentAcc = pArrAccidents[i]
+                    
+                    j = i
+
+                    WHILE(j GREATER THAN 0 AND pArrDistance[j-1] LESS THAN currentDist)
+                        pArrDistance[j] = pArrDistance[j-1]
+                        pArrAccidents[j] = pArrAccidents[j-1]
+
+                        DECREMENT j BY 1
+                    END WHILE
+
+                    pArrDistance[j] = currentDist
+                    pArrAccidents[j] = currentAcc
+                
+                END FOR
+
+                return pArrAccidents
+
+
+
+
+    SUBMODULE: insertionSort
+    IMPORT: pArrDistance(Array of Real numbers)
+    EXPORT: pArrDistance(Array of Real numbers)
+    ASSERTION: sort distances in pArrDistance into ascending order
+               return pArrDistance
+    ALGORITHM:
+                FOR(i = 1 TO LENGTH OF pArrAccidents - 1, INCREMENT i BY 1
+                    
+                    currentDist = pArrDistance[i]
+                    
+                    j = i
+
+                    WHILE(j GREATER THAN 0 AND pArrDistance[j-1] LESS THAN currentDist)
+                        pArrDistance[j] = pArrDistance[j-1]
+
+                        DECREMENT j BY 1
+                    END WHILE
+
+                    pArrDistance[j] = currentDist
+                
+                END FOR
+
+                return pArrDistance
+
+
+
+
+    SUBMODULE: displayResults
+    IMPORT: pSortedArrDistance(Array of Real Numbers), pSortedAccAccidents(Array of Accident), pLocationName(String)
+    EXPORT: nil
+    ASSERTION: Calculate the results and display the results to the user.
+    ALGORITHM:
+                maxFatal = CALL(maxDistSeverity) <- "Fatal", pSortedArrAccidents
+                minFatal = CALL(minDistSeverity) <- "Fatal", pSortedArrAccidents
+
+                maxHospital = CALL(maxDistSeverity) <- "Hospital", pSortedArrAccidents
+                minHospital = CALL(minDistSeverity) <- "Hospital", pSortedArrAccidents
+
+                numAccidents10Km = CALL(numAccidents10Km) <- pSortedArrDistance
+
+                accidentPercent = CALL(percentOfAccidents) <- numAccidents10Km, LENGTH OF pSortedArrAccidents
+
+                PRINT AND GO TO NEXT LINE AFTER EACH MESSAGE
+
+                "Furthest accident from " + pLocationName + " is " + pSortedArrDistance[(pSortedArrAccidents.length-1)] 
+                +"km away."
+                "Closest accident to " +pLocationName + " is " +  pSortedArrDistance[0] + "km  away."
+               
+                IF(maxFatal GREATER THAN 0 OR maxFatal EQUALS minFatal) THEN 
+                    "Furthest fatal accident from " + pLocationName + " is " + pSortedArrDistance[maxFatal] + "km away."
+                    "Closest fatal accident to " + pLocationName + " is " +  pSortedArrDistance[minFatal] + "km away."
+                ELSE
+                    "There are no fatal accidents"
+
+                IF(maxHospital GREATER THAN 0 OR maxHospital EQUALS minHospital) THEN
+                    "Furthest hospital accident from " + pLocationName + " is " + pSortedArrDistance[maxHospital] + "km away."
+                    "Closest hospital accident to " + pLocationName + " is " + pSortedArrDistance[minHospital] + "km away."
+                ELSE 
+                    "There are no hospital accidents"
+
+                "Total number of accidents within 10km of " + pLocationName + " is " + numAccidents10Km + " Accidents."
+                "Percentage of all accidents within 10km of " + pLocationName + " is " + accidentPercent + "% ."
+
+
+
+
+    SUBMODULE: maxDistSeverity
+    IMPORT: pSeverityType(String), pSortedArrAccidents(Array of Accident)
+    EXPORT: elementNum(Integer)
+    ASSERTION: search through pSortedArrAccidents starting from the end to find pSeverityType. 
+               After pSeverityType is found, stop searching and get the elementNum
+    ALGORITHM:
+                elementNum = LENGTH OF pSortedArrAccidents - 1
+                found = FALSE
+
+                WHILE(NOT found AND elementNum GREATER THAN 0)
+                    
+                    IF(pSeverityType EQUALS pSortedArrAccidents[elementNum].getSeverity) THEN
+                        found = TRUE
+                    ELSE
+                        DECREMENT elementNum BY 1
+                    END IF
+                
+                END WHILE
+                
+                RETURN elementNum
+
+
+
+
+    SUBMODULE: minDistSeverity
+    IMPORT: pSeverityType(String), pSortedArrAccidents(Array of Accident)
+    EXPORT: elementNum(Integer)
+    ASSERTION: search through pSortedArrAccidents starting from the front to find pSeverityType. 
+               After pSeverityType is found, stop searching and get the elementNum
+    ALGORITHM:
+                found = FALSE
+                
+                elementNum = 0
+                WHILE(NOT found AND elementNum LESS THAN LENGTH OF pSortedArrAccidents - 1)
+                    
+                    IF(pSeverityType EQUALS pSortedArrAccidents[elementNum].getSeverity) THEN
+                        found = TRUE
+                    ELSE
+                        INCREMENT elementNum BY 1
+                    END IF
+                
+                END WHILE
+
+                RETURN elementNum
+
+
+
+
+    SUBMODULE: numAccidents10Km
+    IMPORT: pArrDistance(Array of Real Numbers)
+    EXPORT: counter(Integer)
+    ASSERTION: search through pArrDistance and count the number of accidents within 10km of user location. Return counter.
+    ALGORITHM:
+                counter = 0
+
+                FOR(i EQUALS 0 TO LENGTH OF pArrDistance - 1, INCREMENT i BY 1) 
+                    
+                    IF(pArrDistance[i] LESS THAN OR EQUAL 10) THEN
+                        INCREMENT counter BY 1
+                    END IF
+
+                RETURN counter
+
+
+
+
+    SUBMODULE: percentOfAccidents
+    IMPORT: numerator(Integer), accidentArrLength(Integer)
+    EXPORT: percentage(Real Numbers)
+    ASSERTION: Calculate the percentage of a given numerator against the total number of Accidents 
+               (Rounded to two decimal places)
+    ALGORITHM:
+                x =  (numerator(CONVERTED TO REAL NUMBER) DIVIDE BY accidentArrLength(CONVERTED TO REAL NUMBER)) TIMES 100
+                percentage = ROUND x TO TWO DECIMAL PLACES
+
+                RETURN percentage
+
+
+
+
+/*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
+//SUBMODULES FOR GENERAL_DATA
+
+ 
+    SUBMODULE: option2Menu
+    IMPORT: nil
+    EXPORT: inChoice(Integer)
+    ASSERTION: Display option 2 menu, get user input and return the choice
+    ALGORITHM:
+                counter = 0
+                inChoice = 0
+                WHILE(inChoice DOES NOT EQUAL 4 AND counter LESS THAN 1) 
+
+                    PRINT("----------------------------------------------------------------------------"
+                          + "----------------------------------");
+                    
+                    PRINT AND GO TO NEXT LINE AFTER EACH MESSAGE
+                    "How would you like to see a summary of the data? Please make a selection from the Menu below."
+                    "> 1. Data displayed on the screen."
+                    "> 2. Data displayed on the screen and written to file."
+                    "> 3. Data written to file."
+                    "> 4. To Main Menu."
+
+                    inChoice = CALL(menuUserInput)
+                    
+                    IF(inChoice GREATER THAN OR EQUAL TO 1 AND inChoice LESS THAN OR EQUAL TO 4)
+                        INCREMENT counter BY 1
+                    ELSE
+                        PRINT("Please enter numbers between 1 - 4 only")
+                    END IF
+
+                END WHILE
+
+                RETURN inChoice
+
+
+  
+
+ SUBMODULE: runUserOption
+    IMPORT: pChoice2(Integer), pArrAccidents(Array of Accident)
+    EXPORT: nil
+    ASSERTION: run actions based on user's choice
+    ALGORITHM:
+                IF(pChoice2 EQUALS 1) THEN
+                    CALL(displaySummary) <- pArrAccidents
+
+                ELSE IF(pChoice2 EQUALS 2) THEN
+                    CALL(displaySummary) <- pArrAccidents
+                    CALL(writeToFile) <- pArrAccidents
+
+                ELSE IF(pChoice2 EQUALS 3) THEN
+                    CALL(writeToFile) <- pArrAccidents
+
+                ELSE IF(pChoice2 EQUALS 4) THEN
+                    PRINT("In Main Menu")
+
+                END IF
+
+
+    
+
+    SUBMODULE: displaySummary
+    IMPORT: pArrAccidents(Array of Accident)
+    EXPORT: nil
+    ASSERTION: calculate and display the summary of data
+    ALGORITHM:
+                PRINT A BLANK LINE
+
+                numFatal = CALL(numSeverityType) <- "Fatal", pArrAccidents
+                numHospital = CALL(numSeverityType) <- "Hospital", pArrAccidents
+
+                numRearEnd = CALL(numEventNature) <- "Rear End", pArrAccidents
+                numRightAngle = CALL(numEventNature) <- "Right Angle", pArrAccidents
+
+                percentFatal = CALL(percentOfAccidents) <- numFatal, LENGTH OF pArrAccidents
+                percentHospital = CALL(percentOfAccidents) <- numHospital, LENGTH OF pArrAccidents
+                percentRearEnd = CALL(percentOfAccidents) <- numRearEnd, LENGTH OF pArrAccidents
+                percentRightAngle = CALL(percentOfAccidents) <- numRightAngle, LENGTH OF pArrAccidents
+
+                PRINT AND GO TO NEXT LINE AFTER EACH MESSAGE
+                "The total number of accidents:" + LENGTH OF pArrAccidents"
+                ""
+
+                "The total number of fatal accidents: " + numFatal
+                "The total number of fatal accidents as a percentage of all accidents: " + percentFatal + "%."
+                ""
+
+                "The total number of hospital accidents: " + numHospital
+                "The total number of hospital accidents as a percentage of all accidents: " + percentHospital + "%."
+                ""
+
+                "The total number of Rear End accidents: " + numRearEnd
+                "The total number of Rear End accidents as a percentage of all accidents: " +  percentRearEnd + "%."
+                ""
+
+                "The total number of Right Angle accidents: " + numRightAngle
+                "The total number of Right Angle accidents as a percentage of all accidents: " + percentRightAngle + "%."
+                ""
+
+
+
+
+    SUBMODULE: numSeverityType
+    IMPORT: pSeverityType(String), pArrAccidents(Array of Accident)
+    EXPORT: counter(Integer)
+    ASSERTION: Search through pArrAccidents and count the number of accidents for a given severity type
+    ALGORITHM:
+                counter = 0
+                FOR(i EQUALS 0 TO LENGTH OF pArrAccidents - 1, INCREMENT i BY 1)
+                
+                    IF(pSeverityType EQUALS pArrAccidents[i].getSeverity) THEN
+                        INCREMENT counter BY 1
+                    END IF
+
+                END FOR
+
+                RETURN counter
+
+                                        
+
+                
+    SUBMODULE: numEventNature
+    IMPORT: pEventNature(String), pArrAccidents(Array of Accident)
+    EXPORT: counter(Integer)
+    ASSERTION: Search through pArrAccidents and count the number of accidents for a given event nature.
+    ALGORITHM:
+                counter = 0;
+                FOR(i EQUALS 0 TO LENGTH OF pArrAccidents -1, INCREMENT i BY 1
+                    
+                    IF(pEventNature EQUALS pArrAccidents[i].getEventNature) THEN    
+                        INCREMENT counter BY 1
+                    END IF
+
+                END FOR
+
+                RETURN counter
+
+
+
+
+    SUBMODULE: writeToFile
+    IMPORT: pArrAccidents(Array of Accident)
+    EXPORT: nil
+    ASSERTION: write the summary data to a file provide by the user
+    ALGORITHM:
+                fileName = CALL(fileNameInput)
+                
+                TRY
+                    numFatal = CALL(numSeverityType) <- "Fatal", pArrAccidents
+                    numHospital = CALL(numSeverityType) <- "Hospital", pArrAccidents
+
+                    numRearEnd = CALL(numEventNature) <- "Rear End", pArrAccidents
+                    numRightAngle = CALL(numEventNature) <- "Right Angle", pArrAccidents
+
+                    percentFatal = CALL(percentOfAccidents) <- numFatal, LENGTH OF pArrAccidents
+                    percentHospital = CALL(percentOfAccidents) <- numHospital, LENGTH OF pArrAccidents
+                    percentRearEnd = CALL(percentOfAccidents) <- numRearEnd, LENGTH OF pArrAccidents
+                    percentRightAngle = CALL(percentOfAccidents) <- numRightAngle, LENGTH OF pArrAccidents
+                    
+                    fileStream = WRITEFILE TO fileName
+                    pw = WRITELINE TO fileStream
+
+                    PRINT TO pw AND GO TO NEXT LINE AFTER EACH MESSAGE
+                    "The total number of accidents:" + LENGTH OF pArrAccidents"
+
+                    "The total number of fatal accidents: " + numFatal
+                    "The total number of fatal accidents as a percentage of all accidents: " + percentFatal + "%."
+
+                    "The total number of hospital accidents: " + numHospital
+                    "The total number of hospital accidents as a percentage of all accidents:" + percentHospital + "%."
+
+                    "The total number of Rear End accidents: " + numRearEnd
+                    "The total number of Rear End accidents as a percentage of all accidents: " +  percentRearEnd + "%."
+
+                    "The total number of Right Angle accidents: " + numRightAngle
+                    "The total number of Right Angle accidents as a percentage of all accidents:" + percentRightAngle + "%."
+                CATCH(I/O EXCEPTION)
+                
+                    IF(fileStream IS NOT NULL) THEN
+                    
+                        TRY
+                            CLOSE fileStream
+                        CATCH(I/O EXCEPTION)
+                        END TRY CATCH
+
+                    END IF
+
+                    PRINT("Error in writing to file!")
+                END TRY CATCH
+
+                   
+               
+                
+    SUBMODULE: fileNameInput
+    IMPORT: nil
+    EXPORT: fileName(String)
+    ASSERTION: get user input for a file name, validate file name so that is a .txt file
+    ALGORITHM:
+                PRINT("Please enter the name of the text file below")
+
+                DO
+                    fileName = ASK USER WITH PROMPT "File Name: "
+                
+                WHILE(fileName EQUALS "" OR FIRST CHARACTER OF fileName EQUALS A SPACE OR (NOT CALL(textFileCheck) <- fileName))
+                
+                RETURN fileName
+
+
+
+
+    SUBMODULE: textFileCheck
+    IMPORT: pFileName(String)
+    EXPORT: isValid(Boolean)
+    ASSERTION: check if a string contains .txt
+    ALGORITHM: 
+                isValid = FALSE
+                IF(LENGTH OF pFileName GREATER OR EQUAL TO 4) THEN                
+                    IF(LAST CHARACTER OF pFileName EQUALS "t") THEN
+                        IF(SECOND LAST CHARACTER OF pFileName EQUALS "x") THEN
+                            IF(THIRD LAST CHARACTER OF pFileName EQUALS "t") THEN
+                                IF(FOURTH LAST CHARACTER OF pFileName EQUALS ".") THEN
+                                    isValid = TRUE
+                END IF
+                
+                IF(NOT isValid) THEN
+                    PRINT("Please enter a .txt file")
+                END IF
+
+                RETURN isValid
+
+
+END AssignmentMain

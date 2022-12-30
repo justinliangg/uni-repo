@@ -1,0 +1,27 @@
+BEGIN 
+
+
+MAIN
+//so arrayLength is within scope of main
+INITIALISE arrayLength
+
+DO 
+
+arrayLength = ASK USER FOR INPUT "Please enter an integer for the array length"
+
+WHILE arraylength NOT  BETWEEN 1 AND 20
+
+
+
+
+maxValue = 20
+
+randomNumber = GENERATE A RANDOM NUMBER WITH maxValue as max value
+
+ASSIGN randomNumber TO EACH ELEMENT OF ARRAY
+
+PRINT "The value of Element x of the array is randomNumber"
+
+
+
+

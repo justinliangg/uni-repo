@@ -1,0 +1,288 @@
+ /*-------------------------------
+FILE: WeatherData.txt
+Author: Justin Liang (19821986)
+UNIT: PDI
+COMMENTS: PSEUDOCODE for WeatherData Class
+ --------------------------------*/
+
+CLASS: WeatherData
+
+    CLASS FIELDS: 
+    code(String)
+    stationNumber(String)
+    year(Integer)
+    month(Integer)
+    day(Integer)
+    maxTemp(Real Number)
+
+    
+
+
+    CONSTRUCTOR WITH PARAMETERS
+    IMPORT: pCode(String), pStationNumber(String), pYear(Integer), pMonth(Integer),
+            pDay(Integer), pMaxTemp(Real Number)
+    EXPORT: nil
+    ALGORITHM:
+                IF(CALL(isValidParam) <- pCode, pStationNumber, pYear, pMonth, pDay, pMaxTemp) THEN
+                    
+                    code = pCode
+                    stationNumber = pStationNumber
+                    year = pYear
+                    month = pMonth
+                    day = pDay
+                    maxTemp = pMaxTemp
+                
+                ELSE
+                    THROW AN EXCEPTION(ILLEGAL ARGUMENT)
+                END IF
+
+    COPY CONSTRUCTOR
+    IMPORT: pWeatherData(WeatherData)
+    EXPORT: nil
+    ALGORITHM:
+                code = pWeatherData.getCode
+                stationNumber = pWeatherData.getStationNumber
+                year = pWeatherData.getYear
+                month = pWeatherData.getMonth
+                day = pWeatherData.getDay
+                maxTemp = pWeatherData.getMaxTemp
+    
+    DEFAULT CONSTRUCTOR
+    IMPORT: nil
+    EXPORT: nil
+    ALGORITHM:
+                code = "IDCJAC0010
+                stationNumber = "4083"
+                year = 2021
+                month = 1
+                day = 1
+                maxTemp = 30.0
+    
+
+
+
+    ACCESSOR METHODS
+
+    ACCESSOR: getCode
+    IMPORT: nil
+    EXPORT: code(String)
+    ALGORITHM:
+                RETURN code
+
+    ACCESSOR: getStationNumber
+    IMPORT: nil
+    EXPORT: stationNumber(String)
+    ALGORITHM:
+                RETURN stationNumber
+
+    ACCESSOR: getYear
+    IMPORT: nil
+    EXPORT: year(Integer)
+    ALGORITHM:
+                RETURN year
+ 
+    ACCESSOR: getMonth
+    IMPORT: nil
+    EXPORT: month(Integer)
+    ALGORITHM:
+                RETURN month
+
+    ACCESSOR: getDay
+    IMPORT: nil
+    EXPORT: day(Integer)
+    ALGORITHM:   
+                RETURN day
+
+    ACCESSOR: getMaxTemp
+    IMPORT: nil
+    EXPORT: maxTemp(Real Number)
+    ALGORITHM:
+                RETURN maxTemp
+
+    
+
+
+    MUTATOR METHODS
+
+    MUTATOR: setCode
+    IMPORT: pCode(String)
+    EXPORT: nil
+    ALGORITHM:
+                IF(pCode DOES NOT EQUAL "" AND pCode IS NOT NULL) THEN
+                    code = pCode
+                END IF
+
+    MUTATOR: setStationNumber
+    IMPORT: pStationNumber(String)
+    EXPORT: nil
+    ALGORITHM:
+                IF(pStationNumber DOES NOT EQUAL "" AND pStationNumber IS NOT NULL) THEN
+                    stationNumber = pStationNumber
+                END IF
+    
+    MUTATOR: setYear
+    IMPORT: pYear(Integer)
+    EXPORT: nil
+    ALGORITHM: 
+                IF(pYear GREATER THAN OR EQUAL TO 1600) THEN
+                    year = pYear
+                END IF
+
+    MUTATOR: setMonth
+    IMPORT: pMonth(Integer)
+    EXPORT: nil
+    ALGORITHM:
+                IF(pMonth GREATER THAN OR EQUAL TO 1 AND pMonth LESS THAN OR EQUAL TO 12) THEN
+                    month = pMonth
+                END IF 
+
+    MUTATOR: setDay
+    IMPORT: pDay(Integer)
+    EXPORT: nil
+    ALGORITHM:
+                IF(CALL(isValidDay) <- year, month, pDay) THEN
+                    day = pDay
+                END IF 
+
+    MUTATOR: setMaxTemp
+    IMPORT: pMaxTemp(Real Number)
+    EXPORT: nil
+    ALGORITHM:
+                IF(pMaxTemp IS GREATER THAN OR EQUAL TO -100.0 AND pMaxTemp LESS THAN OR EQUAL TO 70.0) THEN
+                    maxTemp = pMaxTemp
+                END IF
+
+
+
+
+    SUBMODULE: equals
+    IMPORT: pObject(Object)
+    EXPORT: isEqual(Boolean)
+    ASSERTION: used to check if two objects are equal
+    ALGORITHM:
+                isEqual = FALSE
+                inWeatherData OF CLASS WeatherData = NULL
+
+                IF(pObject IS OF TYPE WeatherData) THEN
+                    inWeatherData = pObject(CONVERTED TO TYPE WeatherData)
+
+                    IF(code EQUALS inWeatherData.getCode) THEN
+                        IF(stationNumber EQUALS inWeatherData.getStationNumber) THEN
+                            IF(year EQUALS inWeatherData.getYear) THEN
+                                IF(month EQUALS inWeatherData.getMonth) THEN
+                                    IF(day EQUALS inWeatherData.getDay) THEN
+                                        IF(maxTemp EQUALS inWeatherData.getMaxTemp) THEN
+                                                
+                                                isEqual = TRUE
+                END IF
+
+                RETURN isEqual
+
+
+
+
+    SUBMODULE: toString
+    IMPORT: nil
+    EXPORT: dateString(String)
+    ASSERTION: returns the class variables as strings
+    ALGORITHM:
+                weatherDataString = "Code: " + code + "\nStationNumber: " + stationNumber + "\nYear: " + year
+                                    + "\nMonth " + month + "\nDay: " + day + "\nMaxTemp: " + maxTemp
+
+                RETURN weatherDataString
+              
+
+
+
+    SUBMODULE: formattedDate
+    IMPORT: nil
+    EXPORT: dateString(String)
+    ASSERTION: returns class variables related to date as strings
+               In day/month/year format
+    ALGORITHM:
+                dateString = day + "/" + month + "/" + year
+
+                RETURN dateString
+
+
+
+
+    SUBMODULE: leapYear
+    IMPORT: pYear(Integer)
+    EXPORT: isLeapYear(Boolean)
+    ASSERTION: Checks if pYear is a leap year
+               Returns true if pYear is a leap year
+    ALGORITHM:
+                isLeapYear = FALSE
+                
+                IF(REMAINDER OF pYear / 4 EQUALS 0) THEN
+                    IF(REMAINDER OF pYear / 100 EQUALS 0) THEN
+                        IF(REMAINDER OF pYear / 400 EQUALS 0) THEN
+                                isLeapYear = TRUE
+
+                    ELSE IF(REMAINDER OF pYear / 100 DOES NOT EQUAL 0) THEN
+                        isLeapYear = TRUE
+
+                END IF  
+
+                RETURN isLeapYear
+
+
+
+
+    SUBMODULE: isValidDay
+    IMPORT: pYear(Integer), pMonth(Integer), pDay(Integer)
+    EXPORT: isValid(Boolean)
+    ASSERTION: Determines if a day for a given month and year is valid
+               Returns true if pDay is valid
+    ALGORITHM:
+                isValid = FALSE
+
+                IF(pMonth EQUALS 4 OR pMonth EQUALS 6 OR pMonth EQUALS 9 OR pMonth EQUALS 11) THEN
+                    IF(pDay GREATER THAN OR EQUAL TO 1 AND pDay LESS THAN OR EQUAL TO 30) THEN
+                        isValid = TRUE
+
+                ELSE IF(pMonth EQUALS 1 or pMonth EQUALS 3 or pMonth EQUALS 5 or pMonth EQUALS 7 or
+                        pMonth EQUALS 8 or pMonth EQUALS 10 or pMonth EQUALS 12) THEN
+                    
+                    IF(pDay GREATER THAN OR EQUAL TO 1 AND pDay LESS THAN OR EQUAL TO 31) THEN
+                        isValid = TRUE
+
+                ELSE IF(pMonth EQUALS 2) THEN
+                    IF(CALL(leapYear) <- pYear) THEN
+                        IF(pDay GREATER THAN OR EQUAL TO 1 OR pDay LESS THAN OR EQUAL TO 29) THEN
+                            isValid = TRUE
+
+                    ELSE
+                        IF(pDay GREATER THAN OR EQUAL TO 1 OR pDay LESS THAN OR EQUAL TO 28) THEN
+                            isValid = TRUE
+
+                END IF 
+
+                RETURN isValid
+
+
+
+
+    SUBMODULE: isValidParam
+    IMPORT: pCode(String), pStationNumber(String), pYear(Integer), pMonth(Integer),
+            pDay(Integer), pMaxTemp(Real Number)
+    EXPORT: isValid(Boolean)
+    ASSERTION: Determines if the paramaters used for the constructor are valid
+               Returns true if valid
+    ALGORITHM:
+                isValid = FALSE
+
+                IF(pCode DOES NOT EQUAL "" AND pCode IS NOT NULL) THEN
+                    IF(pStationNumber DOES NOT EQUAL "" AND pStationNumber IS NOT NULL) THEN
+                        IF(pYear GREATER THAN OR EQUAL TO 1600) THEN
+                            IF(pMonth GREATER THAN OR EQUAL TO 12) THEN
+                                IF(CALL(isValidDay) <- pYear, pMonth, pDay) THEN
+                                    IF(pMaxTemp GREATER THAN OR EQUAL TO -100.0 AND pMaxTemp LESS THAN OR EQUAL TO 70.) THEN
+                                        isValid = TRUE
+                END IF
+
+                return isValid
+
+
+END WeatherData CLASS

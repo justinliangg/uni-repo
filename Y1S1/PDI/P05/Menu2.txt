@@ -1,0 +1,59 @@
+BEGIN Calculator
+
+MAIN
+    PRINT("Welcome to Calculator for 2 Ints")
+    
+    DO 
+ 
+    choice = ASK USER WITH PROMPT ("Choose 1,2,3 or 0)
+      
+    Value1,Value2 = CALL(InputInteger)
+
+
+    SWITCH CHOICE
+    CASE1
+        CALL(sum)
+    
+    CASE2
+        CALL (product)
+
+    CASE3
+        CALL(checkDivisibility)
+    CASE0
+    WHILE choice IS NOT ZERO 
+
+    PRINT(You have exited the program!)
+
+END MAIN
+
+
+
+SUBMODULE InputInteger
+IMPORT: numOfValue(String)
+EXPORT: inputValue(Int)
+ASSERTION: "To print typeOfValue and return value)
+AlGORITHM: 
+PRINT: "Enter a value numOfValue"
+
+SUBMODULE sum
+IMPORT:inputValue1(Int),inputValue2(Int)
+EXPORT:sumValue(Int)
+ASSERTION:"To return sum of 2 values"
+ALGORITHM: sumValue = inputValue1 + inputValue2
+           RETURN sumValue
+
+SUBMODULE product
+IMPORT: inputValue1(Int), inputValue2(Int)
+EXPORT:productValue(Int)
+ASSERTION: "Find the product of two values"
+ALGORITHMN: productValue = inputValue1 + inputValue2
+            RETUN productValue
+
+SUBMODULE: checkDivisibility
+IMPORT: inputValue1(Int),inputValue2(Int)
+EXPORT: divisibility(String)
+ASSERTION:"Determine if two values are divisibility"
+ALGORITHMN: remainder of inputValue1/inputValue2
+
+
+END Calculator

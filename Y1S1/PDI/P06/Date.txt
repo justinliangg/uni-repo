@@ -1,0 +1,86 @@
+CLASS : Date
+
+    CLASS FIELDS = 
+        day(integer)
+        month(Integer)
+        year(Integer)
+
+    ACCESSOR :getDay 
+    IMPORT: 
+    EXPORT: day(Integer)
+    ALGORITHM:RETURN day
+
+    ACCESSOR : getMonth
+    IMPORT: 
+    EXPORT: month(Integer)
+    ALGORITHM:RETURN month
+
+    ACCESSOR : getYear
+    IMPORT: 
+    EXPORT: year(Integer)
+    ALGORITHM:
+    RETURN year
+
+    ACCESSOR : getSuffix
+    IMPORT: 
+    EXPORT: suffix(String)
+    ALGORITHM:
+        IF day EQUAL TO 1,21,31
+        suffix = "st"
+
+        ELSE IF day EQUAL 2,22
+        suffix = "nd"
+        
+        ELSE 
+        suffix = "th"
+        END IF
+
+        RETURN suffix
+
+    SUBMODULE = isLeapYear
+    IMPORT :
+    EXPORT : leapYear(boolean)
+    ALGORITHM: 
+        IF(( year%4 == 0 && year%100 != 0) THEN
+		leapYear = TRUE
+
+	ELSE IF( year%4 == 0 && year%100 ==0) THEN
+		IF(year%400 == 0)
+		leapYear = TRUE
+		ELSE 
+		leapYear = FALSE
+		
+    	ELSE 
+		leapYear = FALSE
+	RETURN leapYear
+
+    MUTATOR : setDay
+    IMPORT : pDay
+    EXPORT:
+    ALGORITHM: IF ( month  = 4,6,9,11) THEN
+			IF (pDay<31 AND pDay>0) THEN
+				Day = pDay
+
+		ELSE IF(month = 1,3,5,7,8,10,12)THEN
+			IF ( pday<32 AND pDay>0) THEN 
+				Day = pDay
+
+		ELSE IF (month = 2) THEN
+			IF(CALL(isLeapYear) =TRUE) THEN
+				IF(pDay<30 AND pDay>0)
+				day = pDay
+			ELSE
+				IF (pDay<29 AND pDay > 0)
+				day = pDay
+         
+    MUTATOR : setMonth
+    IMPORT : pMonth
+    EXPORT:
+    ALGORITHM: 
+        month = pMonth
+  
+    MUTATOR : setYear
+    IMPORT : pYear
+    EXPORT:
+    ALGORITHM : 
+        year = pYear

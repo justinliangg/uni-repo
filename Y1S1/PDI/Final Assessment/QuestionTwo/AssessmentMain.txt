@@ -1,0 +1,505 @@
+/*-------------------------------
+FILE:AssessmentMain.txt
+Author: Justin Liang (19821986)
+UNIT: PDI
+COMMENTS: Pseudocode for AssessmentMain.java
+--------------------------------*/
+
+BEGIN Assessmentmain
+
+    BEGIN MAIN
+            
+            exit = FALSE
+
+            DO
+                PRINT("\nWelcome to the BOM Weather Station Application.")
+                PRINT("Please enter the name of the data file or x to exit> ")
+
+                userInput = CALL(getInput)
+
+                IF(CALL(validFileType) <- userInput) THEN
+                    
+                    CALL(processFile) <- userInput
+
+                ELSE IF(CALL(checkIfExit) <- userInput) THEN
+
+                    exit = TRUE
+                    PRINT("YOU HAVE EXITED THE PROGRAM!")
+                
+                END IF
+
+            WHILE(NOT exit)
+
+            END DO-WHILE
+
+    END MAIN
+
+    
+    SUBMODULES: getInput
+    IMPORT: nil
+    EXPORT: input(String)
+    ASSERTION: get user input for a string
+               return input
+    ALGORITHM:
+                DO
+                    input = ASK USER FOR A STRING INPUT
+
+                WHILE(input EQUALS "" OR FIRST CHARACTER OF input EQUALS A SPACE)
+
+                RETURN input
+
+
+
+
+    SUBMODULE: validFileType
+    IMPORT: pFileName(String)
+    EXPORT: isValid(Boolean)
+    ASSERTION: check if pFileName is a .csv file type
+               Returns true if .csv file
+    ALGORITHM:
+                isValid = FALSE
+
+                IF(LENGTH OF pFileName GREATER OR EQUAL TO 4) THEN
+                    IF(FOURTH LAST CHARACTER OF pFileName EQUALS ".") THEN
+                        IF(THIRD LAST CHARACTER OF pFileName EQUALS "c") THEN
+                            IF(SECOND LAST CHARACTER OF pFileName EQUALS "s") THEN
+                                IF(LAST CHARACTER OF pFileName EQUALS "v") THEN
+                                    isValid = TRUE
+                END IF
+
+                IF(NOT isValid AND NOT CALL(checkIfExit) <- pFileName)
+                    PRINT("\nPlease enter a .csv file")
+                END IF
+
+                RETURN isValid
+
+
+
+
+    SUBMODULE: checkIfExit
+    IMPORT: pUserInput(String)
+    EXPORT: isExit(Boolean)
+    ASSERTION: check if pUserInput is equal to 'x' or 'X'
+               Returns true if equal
+    ALGORITHM:
+                isExit = FALSE
+                
+                IF(LENGTH OF pUserInput IS EQUAL TO 1) THEN
+                    IF(FIRST CHARACTER OF pUserInput EQUALS 'x' OR 'X') THEN
+                        isExit = TRUE
+                END IF
+
+                RETURN isExit
+
+    
+
+
+-------------------------------------------------------------------------------------------------   
+SUBMODULES FOR processFile()
+
+
+    SUBMODULE: processFile
+    IMPORT: pFileName(String)
+    EXPORT: nil
+    ASSERTION: process the file from the user
+    ALGORITHM:
+                totalNumRows = (CALL(countNumRows) <- pFileName) MINUS 1
+                IF(totalNumRows GREATER THAN 0) THEN
+                    numValidRows = CALL(countNumValidRows) <- totalNumRows, pFileName
+                    numInvalidRows = totalNumRows MINUS numValidRows
+
+                    arrWeatherData = CALL(fileRead) <- numValidRows, pFileName
+
+                    sortedArrWeatherData = CALL(insertionSort) <- arrWeatherData
+
+                    CALL(displayData) <- totalNumRows, numInvalidRows, sortedArrWeatherData
+
+                ELSE
+                    PRINT("\nFile is empty! OR Invalid File!")
+
+                END IF
+
+
+
+
+    SUBMODULE: countNumRows
+    IMPORT: pFileName(String)
+    EXPORT: numRows(Integer)
+    ASSERTION: count the number of rows in the file
+    ALGORITHM:
+                numRows = 0
+                TRY
+                    fileInput = OPENFILE pFileName
+                    line = READ LINE FROM fileInput
+                    
+                    WHILE(line IS NOT NULL)
+                        
+                        INCREMENT numRows BY 1
+
+                        line = READ LINE FROM fileInput
+                    
+                    END WHILE
+
+                    CLOSEFILE fileInput
+                
+                CATCH(I/O EXCEPTION AS e)
+                    
+                    IF(fileInput IS NOT NULL)
+                        
+                        TRY
+                            CLOSEFILE fileInput
+                        CATCH(I/O EXCEPTION AS ex2)
+                        END TRY-CATCH
+                    
+                    END IF
+
+                END TRY-CATCH    
+                
+                RETURN numRows
+
+
+
+
+    SUBMODULE: countNumValidRows
+    IMPORT: pTotalNumRows(Integer), pFileName(String)
+    EXPORT: elementNum(Integer)
+    ASSERTION: count number of valid rows
+    ALGORITHM:  
+                dummyWeatherData = CREATE AN ARRAY OF WeatherData TYPE OF SIZE pTotalNumRows
+                
+                elementNum = 0
+                TRY
+                    fileInput = OPENFILE pFileName
+                    line = READ LINE FROM fileInput
+                    
+                    WHILE(line IS NOT NULL)
+                        column = CALL(processLine) <- line
+                        
+                        IF(LENGTH OF column EQUALS 7) THEN
+                            
+                            TRY
+                                code = column[0]
+                                stationNumber = column[1]
+                                year = CONVERT column[2] TO TYPE INTEGER
+                                month = CONVERT column[3] TO TYPE INTEGER
+                                day = CONVERT column[4] TO TYPE INTEGER
+                                maxTemp = CONVERT column[5] TO TYPE DOUBLE
+
+                                dummyWeatherData[elementNum] = CONSTRUCT WeatherData USING code, stationNumber
+                                                               , year, month, day, maxTemp
+                            CATCH(NumberFormatException AS x)
+                            CATCH(IllegalArgumentException AS x2)
+
+                            END TRY CATCH                                
+                        END IF
+
+                        line = READ LINE FROM fileInput
+                    
+                    END WHILE
+
+                    CLOSEFILE fileInput
+                
+                CATCH(I/O EXCEPTION AS e)
+                    
+                    IF(fileInput IS NOT NULL)
+                        
+                        TRY
+                            CLOSEFILE fileInput
+                        CATCH(I/O EXCEPTION AS ex2)
+                        END TRY-CATCH
+                    
+                    END IF
+
+                END TRY-CATCH    
+                
+                RETURN elementNum
+
+
+
+
+    SUBMODULE: fileRead
+    IMPORT: pNumValidRows(Integer), pFileName(String)
+    EXPORT: inArrWeatherData(Array of WeatherData)
+    ASSERTION: Read the file and store values in inArrWeatherData
+    ALGORITHM:
+                inArrWeatherData = CREATE AN ARRAY OF WeatherData TYPE OF SIZE pNumValidRows
+                
+                elementNum = 0
+                TRY
+                    fileInput = OPENFILE pFileName
+                    line = READ LINE FROM fileInput
+                    
+                    WHILE(line IS NOT NULL)
+                        column = CALL(processLine) <- line
+                        
+                        IF(LENGTH OF column EQUALS 7) THEN
+                            
+                            TRY
+                                code = column[0]
+                                stationNumber = column[1]
+                                year = CONVERT column[2] TO TYPE INTEGER
+                                month = CONVERT column[3] TO TYPE INTEGER
+                                day = CONVERT column[4] TO TYPE INTEGER
+                                maxTemp = CONVERT column[5] TO TYPE DOUBLE
+
+                                inArrWeatherData[elementNum] = CONSTRUCT WeatherData USING code, stationNumber
+                                                               , year, month, day, maxTemp
+                            CATCH(NumberFormatException AS x)
+                            CATCH(IllegalArgumentException AS x2)
+
+                            END TRY CATCH                                
+                        END IF
+
+                        line = READ LINE FROM fileInput
+                    
+                    END WHILE
+
+                    CLOSEFILE fileInput
+                
+                CATCH(I/O EXCEPTION AS e)
+                    
+                    IF(fileInput IS NOT NULL)
+                        
+                        TRY
+                            CLOSEFILE fileInput
+                        CATCH(I/O EXCEPTION AS ex2)
+                        END TRY-CATCH
+                    
+                    END IF
+
+                END TRY-CATCH    
+                
+                RETURN inArrWeatherData
+
+
+
+
+    SUBMODULE: processLine
+    IMPORT: pRow(String)
+    EXPORT: inColumn(Array of Strings)
+    ASSERTION: split pRow every ",", store each element seperated in inColumn
+    ALGORITHM:
+                inColumn = SPLIT pRow AT EVERY "," AND STOP ONCE LENGTH OF inColumn EQUALS 7
+                
+                RETURN inColumn 
+
+
+
+
+    SUBMODULE: insertionSort
+    IMPORT: pArrWeatherData(Array of WeatherData)
+    EXPORT: pArrWeatherData(Array of WeatherData)
+    ASSERTION: sort pArrWeatherData based on temp
+    //         highest temp to lowest temp
+    ALGORITHM:
+                FOR( i EQUALS 0 TO LESS THAN LENGTH OF pArrWeatherData - 1, INCREMENT i BY 1)
+                
+                    currentWeatherData = pArrWeatherData[i]
+
+                    j = i
+
+                    WHILE(j GREATER THAN 0 AND pArrWeatherData[j-1].getMaxTemp LESS THAN currentWeatherData.getMaxTemp)
+                        
+                        pArrWeatherData[j] = pArrWeatherData[j-1]
+                        
+                        DECREMENT j BY 1
+                    
+                    END WHILE
+
+                    pArrWeatherData[j] = currentWeatherData
+
+                END FOR
+
+                RETURN pArrWeatherData
+
+
+
+
+    SUBMODULE: displayData
+    IMPORT: pTotalNumRows(Integer), pNumInvalidRows(Integer), pSortedArrWeatherData(Array of WeatherData)
+    EXPORT: nil
+    ASSERTION: display summary of data from csv to user
+    ALGORITHM:
+                PRINT("\nThe data file contains " + pTotalNumRows + " entries.\n"
+                      + "There were " + pNumInvalidRows+ " incomplete data entries.\n")
+
+                CALL(displayMaxTemp) <- pSortedArrWeatherData
+
+                monthInput = CALL(getMonthInput)
+                avgTemp = CALL(calculateAvgTemp) <- monthInput, pSortedArrWeatherData
+                PRINT("The average temperature for month " + CALL(getMonthName) <- monthInput + " was: "
+                      + avgTemp + "°")
+
+
+
+
+    SUBMODULE: displayMaxTemp
+    IMPORT: pSortedArrWeatherData(Array of WeatherData)
+    EXPORT: nil
+    ASSERTION: Displays details of max temp
+    ALGORITHM:
+                PRINT("\nDetails of the maximum temperature")
+                PRINT("Temperature: " + pSortedArrWeatherData[0].getMaxTemp() + "°")
+
+                elementNum = 0
+                found = FALSE
+
+                WHILE(NOT found)
+                    IF(pSortedArrWeatherData[elementNum].getMaxTemp < pSortedArrWeatherData[0].getMaxTemp)
+                        found = TRUE
+                    ELSE
+                        PRINT("Code: " + pSortedArrWeatherData[elementNum].getCode());
+                        PRINT("Station Number: " + pSortedArrWeatherData[elementNum].getStationNumber());
+                        PRINT("Date: " + pSortedArrWeatherData[elementNum].formattedDate());
+
+                        INCREMENT elementNum BY 1
+                    END IF
+
+                END WHILE
+
+
+
+
+    SUBMODULE: getMonthInput
+    IMPORT:nil
+    EXPORT: monthNum(Integer)
+    ASSERTION: get user input for a selected month
+    ALGORITHM:
+                monthNum = 0
+                monthAcquired = false
+                WHILE(NOT monthAcquired)    
+                    
+                    PRINT("\nWhat month would you like to know the average temperature for? > ")
+                    
+                    month = CALL(getInput)
+                    upperCaseMonth = CONVERT ALL CHARACTERS IN month TO UPPERCASE
+
+                    IF(upperCaseMonth EQUALS "JANUARY" OR month EQUALS "1") THEN
+                        monthAcquired = TRUE
+                        monthNum = 1
+
+                    IF(upperCaseMonth EQUALS "FEBRUARY" OR month EQUALS "2") THEN
+                        monthAcquired = TRUE
+                        monthNum = 2
+
+                    IF(upperCaseMonth EQUALS "MARCH" OR month EQUALS "3") THEN
+                        monthAcquired = TRUE
+                        monthNum = 3
+
+                    IF(upperCaseMonth EQUALS "APRIL" OR month EQUALS "4") THEN
+                        monthAcquired = TRUE
+                        monthNum = 4
+
+                    IF(upperCaseMonth EQUALS "MAY" OR month EQUALS "5") THEN
+                        monthAcquired = TRUE
+                        monthNum = 5
+
+                    IF(upperCaseMonth EQUALS "JUNE" OR month EQUALS "6") THEN
+                        monthAcquired = TRUE
+                        monthNum = 6
+
+                    IF(upperCaseMonth EQUALS "JULY" OR month EQUALS "7") THEN
+                        monthAcquired = TRUE
+                        monthNum = 7
+
+                    IF(upperCaseMonth EQUALS "AUGUST" OR month EQUALS "8") THEN
+                        monthAcquired = TRUE
+                        monthNum = 8
+
+                    IF(upperCaseMonth EQUALS "SEPTEMBER" OR month EQUALS "9") THEN
+                        monthAcquired = TRUE
+                        monthNum = 9
+
+                    IF(upperCaseMonth EQUALS "OCTOBER" OR month EQUALS "10") THEN
+                        monthAcquired = TRUE
+                        monthNum = 10
+
+                    IF(upperCaseMonth EQUALS "NOVEMBER" OR month EQUALS "11") THEN
+                        monthAcquired = TRUE
+                        monthNum = 11
+
+                    IF(upperCaseMonth EQUALS "DECEMBER" OR month EQUALS "12") THEN
+                        monthAcquired = TRUE
+                        monthNum = 12
+                    ELSE
+                        PRINT("\nPlease enter a valid month!") 
+                    END IF
+                END WHILE
+
+                RETURN monthNum
+                
+
+
+
+    SUBMODULE: calculateAvgTemp
+    IMPORT: pMonthInput(Integer), pSortedArrWeatherData(Array of WeatherData)
+    EXPORT: inAvgTemp(Real Number)
+    ASSERTION: calculatoe the average temp for a given month
+    ALGORITHM:
+                totalTemp = 0.0
+                numTemp = 0
+                FOR(i EQUALS 0 TO LENGTH OF pSortedArrWeatherData - 1, INCREMENT i BY 1)
+                    IF(pSortedArrWeatherData[i].getMonth EQUALS pMonthInput) THEN
+                        totalTemp = totalTemp + pSortedArrWeatherData[i].getMaxTemp
+                        INCREMENT numTemp BY 1
+                    END IF
+                END FOR
+
+                inAvgTemp = totalTemp / numTemp CONVERTED TO TYPE Real Number
+
+                inAvgTemp = ROUND inAvgTemp TO 2 DECIMAL PLACES
+
+                RETURN inAvgTemp
+
+    
+
+
+    SUBMODULE: getMonthName
+    IMPORT: pMonthInput(Integer)
+    EXPORT: monthName(String)
+    ASSERTION: get a month as an integer and return its name
+    ALGORITHM:
+                monthName = NULL
+
+                IF(pMonthInput EQUALS 1) THEN
+                    monthName = "January"
+                
+                ELSE IF(pMonthInput EQUALS 2) THEN
+                    monthName = "February"
+
+                ELSE IF(pMonthInput EQUALS 3) THEN
+                    monthName = "March"
+
+                ELSE IF(pMonthInput EQUALS 4) THEN
+                    monthName = "April"
+
+                ELSE IF(pMonthInput EQUALS 5) THEN
+                    monthName = "May"
+
+                ELSE IF(pMonthInput EQUALS 6) THEN
+                    monthName = "June"
+
+                ELSE IF(pMonthInput EQUALS 7) THEN
+                    monthName = "July"
+
+                ELSE IF(pMonthInput EQUALS 8) THEN
+                    monthName = "August"
+
+                ELSE IF(pMonthInput EQUALS 9) THEN
+                    monthName = "September"
+                    
+                ELSE IF(pMonthInput EQUALS 10) THEN
+                    monthName = "October"
+
+                ELSE IF(pMonthInput EQUALS 11) THEN
+                    monthName = "November"
+
+                ELSE IF(pMonthInput EQUALS 12) THEN
+                    monthName = "December"
+
+                END IF
+
+                RETURN monthName
+
+
+END AssessmentMain

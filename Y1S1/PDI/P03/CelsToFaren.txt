@@ -1,0 +1,26 @@
+BEGIN Converter
+MAIN: 
+
+choice  = ASK USER WITH PROMPT  "What Temperate scale are you converting from? C for Celcius and F for Farenheit"
+
+IF choice=C
+
+    celcius  <- ASK USER WITH PROMPT "Insert in temperature
+
+    fahrenheit <- 9/5 * celcius + 32
+
+    PRINT "Fahrenheit= "fahrenheit
+
+ELSE IF choice = F 
+
+    fahrenheit <- ASK USER WITH PROMPT "Insert in Fahrenheit"
+
+    celcius <- (fahrenheit-32)*5/9 
+
+    Print "Celcius= " celcius
+
+ELSE 
+
+    Print "Error! Reset Program"
+
+

@@ -1,0 +1,187 @@
+BEGIN MAIN
+
+	DO
+
+		choice = ASK USER WITH PROMPT "Please select a person. 1) Joey 2)Cory 3)Rachel"
+	
+		DO
+
+		IF choice = 1
+
+		choiceAnimal = CALL(animalInput)
+	
+		ELSE IF choice = 2 
+
+		choiceAnimal= CALL(animalInput)
+
+		ELSE IF choice= 3 
+
+		choiceAnimal = CALL(animalInput)
+                
+		ENDIF 
+		
+		while(choice <1 or choice >3)
+
+		width = CALL(dimensionsPond)
+		Height = CALL(dimensionsPond)
+		Length = CALL(dimensionsPond)
+	
+		pondDimensions = width X Height X Length
+	
+		animalPerM3 = CALL(AnimalsPerM3)	
+	
+		//how many animals can fit into pond
+		x = pondDimensions / animalPerM3
+		animalName= CALL(animalName)
+		personName= CALL(personName)
+		gender = call(gender) 		
+		//type of
+		PRINT personName can store x animalName in gender pondDimensions pond
+
+
+END MAIN
+
+
+
+
+
+SUBMODULE: animalInput
+IMPORT:animal1(String),animal2(String) 
+EXPORT:choiceAnimal
+ASSERTION: Get user input for which animal
+AlGORITHM: choiceAnimal = ASK USER WITH PROMPT "Please select an animal you would like store. 1)animal1
+2)animal2.
+
+SUBMODUEL: dimensionsPond
+Import:Dimension(String)
+EXPORT : valueOfDimension(double)
+iASSERTION: get valueOfDimension from user
+ALGORITHMN:
+	    valueOfDimension = ASK USER WITH PROMPT : "Please enter Dimension"
+	    RETURN valueOfDimension
+
+
+SUBMODULE: animalsPerM3
+IMPORT:choice(Int),choiceAnimal(Int)
+EXPORT:AnimalPerM3(Int)
+ASSERTION: get Animals Per Meter Cube for which combination of choice and choiceAnimal
+ALGORITHMN: IF choice = 1 && choiceAnimal = 1
+		AnimalsPerM3 = 0.5
+	    ELSE IF choice = 1 && choiceAnimal = 2
+		AnimalsPerM3 = 0.4
+		
+	    ELSE IF choice = 2 && choiceAnimal = 1
+		AnimalsPerM3 = 0.6
+	
+	    ELSE IF choice = 2 && choiceAnimal = 2
+		AnimalsPerM3= 0.8
+	
+	    ELSE IF choice = 3 && choiceAnimal = 1
+		AnimalsPerM3 = 1.2
+		
+	    ELSE IF choice = 3 && choiceAnimal = 2
+		AnimalsPerM3 = 4.5
+
+
+
+
+SUBMODULE:animalName
+IMPORT:choice(Int),choiceAnimal(Int)
+EXPORT:animalName( String)
+ASSERTION: get animal name  for which combination of choice and choiceAnimal
+ALGORITHMN: IF choice = 1 && choiceAnimal = 1
+               RETURN "Sting Rays"
+            ELSE IF choice = 1 && choiceAnimal = 2
+                RETURN "Arowana"
+
+            ELSE IF choice = 2 && choiceAnimal = 1
+                RETURN "Koi"
+
+            ELSE IF choice = 2 && choiceAnimal = 2
+                RETURN "Puffer Fish"
+
+            ELSE IF choice = 3 && choiceAnimal = 1
+                RETURN "Turtles"
+
+            ELSE IF choice = 3 && choiceAnimal = 2
+                RETURN "Frogs"
+
+SUBMODULE: personName
+IMPORT: choice(int)
+EXPORT: personName
+ASSERTION: get person name for choice
+ALGORITHMN: IF choice= 1 
+		RETURN"Joey"
+	    ELSE IF CHOICE = 2
+		RETURN "Cory"
+	
+	    ELSE 
+		RETURN "Rachel"
+
+SUBMODULE: gender
+IMPORT: choice(int)
+EXPORT: gender(String)
+ASSERTION: get gender for choice
+ALGORITHMN: IF choice =1 OR choice=3
+		RETURN"her"
+	     ELSE 
+		RETURN "his"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

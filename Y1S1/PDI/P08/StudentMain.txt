@@ -1,0 +1,11 @@
+
+
+
+
+
+SUBMODULE: readFile
+IMPORT: pFileName(String) , pStudent(ARRAY OF Student) , pNumStudents(int)
+EXPORT: numStudents
+ALGORITHM:
+            fileInput = OPENFILE WITH NAME pFileName
+            lin

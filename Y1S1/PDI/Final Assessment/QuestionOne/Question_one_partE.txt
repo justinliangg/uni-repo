@@ -1,0 +1,65 @@
+/*-------------------------------
+FILE:Question_one_partE.txt
+Author: Justin Liang (19821986)
+UNIT: PDI
+COMMENTS: Pseudocode for Question 1e)
+--------------------------------*/
+
+BEGIN Question_one_partF
+
+    BEGIN MAIN
+        
+        PRINT("\nArea Of A Square Calculator")
+        PRINT("\nPlease enter length of side")
+
+        length = CALL(userInput) <- "Length"
+
+        area = CALL(calculateArea) <- length
+
+        PRINT("\nArea" + " = " + area)
+
+    END MAIN
+
+
+
+
+    SUBMODULE: userInput
+    IMPORT: sideName(String)
+    EXPORT: input(Real Number)
+    ASSERTION: get user input for a real number
+               return the number
+    ALGORITHM: 
+                input = -1.0
+                DO
+                    TRY
+                        PRINT(sideName + ": ")
+                        input = GET USER INPUT FOR A REAL NUMBER
+
+                        IF(input LESS THAN OR EQUAL TO 0.0) THEN 
+                            PRINT(sideName + " has to be greater than 0!")
+                        END IF
+
+                    CATCH(USER INPUTS A NON REAL NUMBER)
+                    END TRY-CATCH
+
+                WHILE(input LESS THAN OR EQUAL TO 0.0)
+                END DO-WHILE
+
+                RETURN input
+
+
+    
+
+    SUBMODULE: calculateArea
+    IMPORT: pLength(Real Number)
+    EXPORT: inArea(Real Number)
+    ASSERTION: Calulate area of a square using pLength
+    ALGORITHM:
+                inArea = pLength MULTIPLIED BY pLength
+
+                inArea = ROUND inArea TO 2 DECIMAL PLACES
+
+                RETURN inArea
+
+
+END Question_one_partF                

@@ -1,0 +1,265 @@
+ /*-------------------------------
+FILE: Accident.txt
+Author: Justin Liang (19821986)
+UNIT: PDI
+COMMENTS: PSEUDOCODE for Accident Class
+REQUIRES: NIL
+ --------------------------------*/
+
+CLASS: Accident
+
+    CLASS FIELDS :
+        
+    id(String)
+    date(String)
+    time(String)
+    severity(String)
+    roadName(String)
+    intersectionNumber(String)
+    eventNature(String)
+    location(Location)
+ 
+
+
+        
+    CONSTRUCTOR WITH PARAMETERS
+    IMPORT: pId(String), pDate(String), pTime(String), pSeverity(String), pRoadName(String), pIntersectionNumber(String)
+            , pEventNature(String), pLocation(Location)
+    EXPORT: nil 
+    ALGORITHM:
+                IF(NOT CALL(empty) <- pId, pDate, pTime, pSeverity, pRoadName, pIntersectionNumber, pEventNature
+                                      , pLocation) THEN
+                    id = pId
+                    date = pDate
+                    time = pTime
+                    severity = pSeverity
+                    roadName = pRoadName
+                    intersectionNumber = pIntersectionNumber
+                    eventNature = pEventNature
+                    location = pLocation
+
+                ELSE
+                    id = "12345678"
+                    date = "01/01/21"
+                    time = "0000"
+                    severity = "Hospital"
+                    roadName = "Albany Hwy"
+                    intersectionNumber = "1234"
+                    eventNature = "Rear End"
+                    location = CONSTRUCT Location USING DEFAULT 
+
+                END IF
+
+    COPY CONSTRUCTOR
+    IMPORT: pAccident(Accident)
+    EXPORT: nil
+    ALGORITHM:
+                id = pAccident.getId
+                date = pAccident.getDate
+                time = pAccident.getTime
+                severity = pAccident.getSeverity
+                roadName = pAccident.getRoadName
+                intersectionNumber = pAccident.getIntersectionNumber
+                eventNature = pAccident.getEventNature
+                location = pAccident.getLocation
+                
+    DEFAULT CONSTRUCTOR
+    IMPORT: nil
+    EXPORT: nil 
+    ALGORITHM:
+                id = "12345678"
+                date = "01/01/21"
+                time = "0000"
+                severity = "Hospital"
+                roadName = "Albany Hwy"
+                intersectionNumber = "1234"
+                eventNature = "Rear End"
+                location = CONSTRUCT Location USING DEFAULT 
+
+
+
+
+    ACCESSOR METHODS
+
+    ACCESSOR: getId
+    IMPORT: nil
+    EXPORT: id(String)
+    ALGORITHM: 
+                RETURN Id
+
+    ACCESSOR: getDate 
+    IMPORT: nil
+    EXPORT: date(String)
+    ALGORITHM:
+                RETURN date
+
+    ACCESSOR: getTime
+    IMPORT: nil
+    EXPORT: time(String)
+    ALGORITHM:
+                RETURN time
+
+    ACCESSOR: getSeverity
+    IMPORT: nil
+    EXPORT: severity(String)
+    ALGORITHM:
+                RETURN severity
+
+    ACCESSOR: getRoadName
+    IMPORT: nil
+    EXPORT: roadName(String)
+    ALGORITHM:
+                RETURN roadName
+
+    ACCESSOR: getIntersectionNumber
+    IMPORT: nil
+    EXPORT: intersectionNumber(String)
+    ALGORITHM:
+                RETURN intersectionNumber
+
+    ACCESSOR: getEventNature
+    IMPORT: nil
+    EXPORT: eventNature(String)
+    ALGORITHM:
+                RETURN eventNature
+   
+    ACCESSOR: getLocation
+    IMPORT: nil
+    EXPORT: location(Location)
+    ALGORITHM:
+                RETURN location
+
+
+
+    
+    MUTATOR METHODS
+
+    MUTATOR: setId
+    IMPORT: pId(String)
+    EXPORT: nil
+    ALGORITHM:
+                IF(pId DOES NOT EQUAL "" && pId IS NOT NULL) THEN
+                    id = pId
+                END IF
+
+    MUTATOR: setDate
+    IMPORT: pDate(String)
+    EXPORT: nil
+    ALGORITHM: 
+                IF(pDate DOES NOT EQUAL "" && pDate IS NOT NULL) THEN
+                    date = pDate
+                END IF
+
+    MUTATOR: setTime
+    IMPORT: pTime(String)
+    EXPORT: nil
+    ALGORITHM:
+                IF(pTime DOES NOT EQUAL "" && pTime IS NOT NULL) THEN
+                    time = pTime
+                END IF
+
+    MUTATOR: setSeverity
+    IMPORT: pSeverity(String)
+    EXPORT: nil
+    ALGORITHM:
+                IF(pSeverity DOES NOT EQUAL "" && pSeverity IS NOT NULL) THEN
+                    severity = pSeverity
+                END IF
+
+    MUTATOR: setRoadName
+    IMPORT: pRoadName(String)
+    EXPORT: nil
+    ALGORITHM:
+                IF(pRoadName DOES NOT EQUAL "" && pRoadName IS NOT NULL) THEN
+                    roadName = RoadName
+                END IF
+
+    MUTATOR: setIntersectionNumber
+    IMPORT: pIntersectionNumber(String)
+    EXPORT: nil
+    ALGORITHM:
+                IF(pIntersectionNumber DOES NOT EQUAL "" && pIntersectionNumber IS NOT NULL) THEN
+                    intersectionNumber = pIntersectionNumber
+                END IF
+
+    MUTATOR: setEventNature
+    IMPORT: pEventNature(String)
+    EXPORT: nil
+    ALGORITHM:  
+                IF(pEventNature DOES NOT EQUAL "" && pEventNature IS NOT NULL) THEN
+                    eventNature = pEventNature
+                END IF
+
+    MUTATOR: setLocation
+    IMPORT: pLocation(Location)
+    EXPORT: nil
+    ALGORITHM:
+                IF(pLocation IS NOT NULL) THEN
+                    location = pLocation
+                END IF
+
+
+
+
+    SUBMODULE: equals
+    IMPORT: pObject(Object)
+    EXPORT: isEqual(Boolean)
+    ASSERTION: check if two objects of type Accident are equal
+    ALGORITHM: 
+                isEqual = FALSE
+                inAccident OF CLASS Accident = NULL
+
+                IF(pObject IS OF TYPE Accident) THEN
+                    inAccident = (CONVERT TO TYPE Accident) pObject
+                    IF(id EQUALS inAccident.getId) THEN
+                        IF(date EQUALS inAccident.getDate) THEN
+                            IF(time EQUALS inAccident.getTime) THEN
+                                IF(severity EQUALS inAccident.getSeverity) THEN
+                                    IF(roadName EQUALS inAccident.getRoadName) THEN
+                                        IF(intersectionNumber EQUALS inAccident.getIntersectionNumber) THEN
+                                            IF(eventNature EQUALS inAccident.getEventNature) THEN
+                                                IF(location EQUALS inAccident.getLocation) THEN
+                                                    isEqual = TRUE
+               END IF
+                
+               RETURN isEqual          
+
+
+
+  
+    SUBMODULE: toString
+    IMPORT: nil
+    EXPORT: AccidentString(String)
+    ASSERTION: returns class fields as a string
+    ALGORITHM:
+                accidentString = "ID: " + id + "\nDate: " + date + "\nTime: " + time + "\nSeverity: " + severity + "\nRoadName: "+ roadName + "\nIntersectionNumber: " + intersectionNumber + "\nEventNature: " + eventNature + "\nLocation" + location  
+
+                RETURN accidentString
+
+
+
+
+    SUBMODULE: empty
+    IMPORT: pId(String), pDate(String), pTime(String), pSeverity(String), pRoadName(String), pIntersectionNumber(String)
+            pEventNature(String), pLocation(Location)  
+    EXPORT: isEmpty(Boolean)
+    ASSERTION: Check whether the imported variables are empty or null
+    ALGORITHM:
+                isEmpty = TRUE
+                
+                IF(pId DOES NOT EQUAL "" && pId IS NOT NULL) THEN
+                    IF(pDate DOES NOT EQUAL "" && pDate IS NOT NULL) THEN
+                        IF(pTime DOES NOT EQUAL "" && pTime IS NOT NULL) THEN
+                            IF(pSeverity DOES NOT EQUAL "" && pSeverity IS NOT NULL) THEN
+                                IF(pRoadName DOES NOT EQUAL "" && pRoadName IS NOT NULL) THEN
+                                    IF(pIntersectionNumber DOES NOT EQUAL "" && pIntersectionNumber IS NOT NULL) THEN
+                                        IF(pEventNature DOES NOT EQUAL "" && pEventNature IS NOT NULL) THEN
+                                            IF(pLocation DOES NOT EQUAL "" && pLocation IS NOT NULL) THEN
+                                                
+                                                isEmpty = FALSE
+                END IF
+                
+                RETURN isEmpty
+
+
+END Accident CLASS

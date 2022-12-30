@@ -1,0 +1,136 @@
+CLASS : Date
+
+    CLASS FIELDS = 
+        day(integer)
+        month(Integer)
+        year(Integer)
+
+    CONSTRUCTOR WITH PARAMETER
+    IMPORT : pDay(Integer),pMonth(Integer),pYear(Integer)
+    EXPORT: NIL
+    AlGORITHM: 
+                day = pDay
+                month = pMonth
+                year = pYear
+
+    COPY CONSTRUCTOR
+    IMPORT: pDate(Date)
+    EXPORT: nil
+    AlGORITHM : 
+                day = pDate.getDay()
+                month = pDate.getMonth()
+                year = pDate.getYear()
+    
+    DEFAULT CONSTRUCTOR
+    IMPORT : 
+    EXPORT :
+    ALGORITHM:
+                day = 1
+                month = 1
+                year = 2021
+
+    ACCESSOR :getDay 
+    IMPORT: 
+    EXPORT: day(Integer)
+    ALGORITHM:RETURN day
+
+    ACCESSOR : getMonth
+    IMPORT: 
+    EXPORT: month(Integer)
+    ALGORITHM:RETURN month
+
+    ACCESSOR :getYear
+    IMPORT: 
+    EXPORT: year(Integer)
+    ALGORITHM:
+    RETURN year
+    
+    ACCESSOR : getSuffix
+    IMPORT: 
+    EXPORT: suffix(String)
+    ALGORITHM:
+        IF day EQUAL TO 1,21,31
+        suffix = "st"
+
+        ELSE IF day EQUAL 2,22
+        suffix = "nd"
+        
+        ELSE 
+        suffix = "th"
+        END IF
+
+        RETURN suffix
+
+    SUBMODULE = isLeapYear
+    IMPORT :
+    EXPORT : leapYear(boolean)
+    ALGORITHM: 
+        IF(( year%4 == 0 && year%100 != 0) THEN
+		leapYear = TRUE
+
+	ELSE IF( year%4 == 0 && year%100 ==0) THEN
+		IF(year%400 == 0)
+		leapYear = TRUE
+		ELSE 
+		leapYear = FALSE
+		
+    	ELSE 
+		leapYear = FALSE
+	RETURN leapYear
+
+
+    MUTATOR : setDay
+    IMPORT : pDay
+    EXPORT:
+    ALGORITHM: IF ( month  = 4,6,9,11) THEN
+			IF (pDay<31 AND pDay>0) THEN
+				Day = pDay
+
+		ELSE IF(month = 1,3,5,7,8,10,12)THEN
+			IF ( pday<32 AND pDay>0) THEN 
+				Day = pDay
+
+		ELSE IF (month = 2) THEN
+			IF(CALL(isLeapYear) =TRUE) THEN
+				IF(pDay<30 AND pDay>0)
+				day = pDay
+			ELSE
+				IF (pDay<29 AND pDay > 0)
+				day = pDay
+         
+    MUTATOR : setMonth
+    IMPORT : pMonth
+    EXPORT:
+    ALGORITHM: 
+        month = pMonth
+  
+    MUTATOR : setYear
+    IMPORT : pYear
+    EXPORT:
+    ALGORITHM : 
+        year = pYear
+    
+    SUBMODULE : toString
+    IMPORT : 
+    EXPORT : dateString(String)
+    ALOGORITHM: 
+                PRINT" day + "/" + month+ "/"+ year
+    
+    SUBMODULE: equals
+    IMPORT: pObject(Object)
+    EXPORT : isEqual(Boolean)
+    ALGORITHM: 
+            isEqual = FALSE
+            inDate OF CLASS Date = NULL
+            
+            IF(pObject IS OF TYPE Date) THEN
+                inDate = CONVERT TO DATE CLASS pObject
+        
+                IF(day = pObject.getDay) THEN
+                    IF(month = pObject.getDay) THEN
+                        IF(year = pObject.getYear) THEN
+                            isEqual = TRUE
+
+        
+
+        

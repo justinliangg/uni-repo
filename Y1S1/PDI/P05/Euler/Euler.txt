@@ -1,0 +1,25 @@
+BEGIN MAIN
+
+arrayLength = ASK USER WITH PROMPT"Please enter the number of terms you would like to calculate for Euler's constant(Between 6 to 100)"
+
+int array[] = CREATE ARRAY OF LENGTH AS arrayLength
+int w = 1
+FOR (i EQUAL 0 TO i<arrayLength, INCREMENT i BY 1)
+	IF i=0
+	array[0] = 1;
+
+	ELSE 
+	array[i] = 1/(i*w)
+	w= w*i
+	
+	ENDIF
+
+END FOR
+
+
+END MAIN	
+
+
+	 
+
+	
