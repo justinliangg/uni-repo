@@ -1,0 +1,99 @@
+
+Criteria 2) 
+
+- SimulatorApp
+Class that controls the emergency simulation. It receives messages from 
+ResponderComm and then notifies all the observers (Emergencies) of the 
+simulation every second. 
+
+
+-EmergencyObserver
+Interface that has an update method. Used for the implementation of the 
+Observer pattern. Any classes that implements this observer interface,
+are observing the change in time of the simulation and any messages received.
+
+
+- Emergency
+Abstract class to hold all information of an emergency, like location and 
+startTime etc. FireEmergency, FloodEmergency and ChemicalEmergency are 
+subclasses of this class. It also implements EmergencyObserver as
+any Emergencies should observe any change in the Simulation.
+
+
+- EmergencyState
+Interface that provides the template that all states of any emergency should
+implement. It also uses generics to specify which subclasses of Emergency
+should be used for its methods context parameter.
+
+
+
+Criteria 3)
+
+- Error handling
+
+FileFormatException: 
+Thrown this exception whenever there is a deviation from the file format 
+specified in the specification. It is caught in the main function and halts
+the start of the simulation.
+
+
+- Logging
+ 
+Have mainly used log.info calls at major points of the program that I thought
+would be useful when trying debug the program and be able to understand the 
+flow of the simulation. 
+
+Have tried to create an appropriate amount of log info calls so as to not 
+clutter the log file and also reduce readability of the code base. Can also
+set to a higher minimum level so that it does not log unless needed for
+debugging.
+
+Only used log.SEVERE calls inside any catch statements as that would mean that 
+something has gone wrong in the program.
+
+
+
+Criteria 4)
+
+Have created the subclasses of Emergency class (Obsevers) in Main before 
+start of SimulatorApp and then injected the list of EmergencyObservers into 
+SimulatorApp. 
+
+Have also created ResponderComm in Main before start of the SimulatorApp and
+then injected it into the program through startSimulation method.
+
+This allows mock objects of EmergencyObservers and ResponderComm to be made 
+when trying to test SimulatorApp.
+
+
+
+Criteria 5)
+
+Have made the SimulatorApp as the subject and the Emergencies as observers.
+As the emergencies mainly just need to know about messages from responders
+and the change in time. Therefore it is a one way communication where the 
+SimulatorApp just notifies the emergencies and they act according to the 
+infomation received. 
+
+This facilitates decoupling as the SimulatorApp does not need to know anything 
+about what the Emergencies do, just that it implements the EmergencyObserver 
+interface and that it has an update method. 
+
+It also provides extensibility as any new emergency type can implement 
+the EmergencyObserver interface and be used in the SimulatorApp.
+
+
+
+Criteria 6)
+
+Have used the State pattern in the Emergency subclasses as each emergency 
+have different behaviours depending on their severity or state. Hence it made 
+sense to implement the state pattern.
+
+The Emergency subclasses are the context and holds a EmergencyState object 
+in its class field. The EmergencyState objects defines what needs to be 
+send through the responderComm and when any transitions need to take place.
+Removing the responsibility from the Context.
+
+This makes adding a new state extremely easy, as it just has to implement the
+EmergencyState interface. Therefore increasing extensibility.

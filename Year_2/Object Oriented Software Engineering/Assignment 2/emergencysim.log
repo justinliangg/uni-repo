@@ -1,0 +1,98 @@
+May 29, 2022 7:50:51 PM edu.curtin.emergencysim.Main main
+INFO: Reading input file
+May 29, 2022 7:50:52 PM edu.curtin.emergencysim.Main main
+INFO: Creating the observers of the simulation
+May 29, 2022 7:50:52 PM edu.curtin.emergencysim.Main main
+INFO: Starting simulation
+May 29, 2022 7:50:52 PM edu.curtin.emergencysim.SimulatorApp startSimulation
+INFO: Time: 0
+May 29, 2022 7:50:53 PM edu.curtin.emergencysim.SimulatorApp startSimulation
+INFO: Time: 1
+May 29, 2022 7:50:54 PM edu.curtin.emergencysim.SimulatorApp startSimulation
+INFO: Time: 2
+May 29, 2022 7:50:55 PM edu.curtin.emergencysim.SimulatorApp startSimulation
+INFO: Time: 3
+May 29, 2022 7:50:56 PM edu.curtin.emergencysim.SimulatorApp startSimulation
+INFO: Time: 4
+May 29, 2022 7:50:57 PM edu.curtin.emergencysim.SimulatorApp startSimulation
+INFO: Time: 5
+May 29, 2022 7:50:58 PM edu.curtin.emergencysim.SimulatorApp startSimulation
+INFO: Time: 6
+May 29, 2022 7:50:59 PM edu.curtin.emergencysim.SimulatorApp startSimulation
+INFO: Time: 7
+May 29, 2022 7:51:00 PM edu.curtin.emergencysim.SimulatorApp startSimulation
+INFO: Time: 8
+May 29, 2022 7:51:01 PM edu.curtin.emergencysim.SimulatorApp startSimulation
+INFO: Time: 9
+May 29, 2022 7:51:02 PM edu.curtin.emergencysim.SimulatorApp startSimulation
+INFO: Time: 10
+May 29, 2022 7:51:02 PM edu.curtin.emergencysim.emergencies.fire.states.Idle update
+INFO: fire start at Midtown
+May 29, 2022 7:51:03 PM edu.curtin.emergencysim.SimulatorApp startSimulation
+INFO: Time: 11
+May 29, 2022 7:51:03 PM edu.curtin.emergencysim.emergencies.fire.states.LowIntensity checkCasualties
+INFO: fire casualty at Midtown
+May 29, 2022 7:51:04 PM edu.curtin.emergencysim.SimulatorApp startSimulation
+INFO: Time: 12
+May 29, 2022 7:51:05 PM edu.curtin.emergencysim.SimulatorApp startSimulation
+INFO: Time: 13
+May 29, 2022 7:51:06 PM edu.curtin.emergencysim.SimulatorApp startSimulation
+INFO: Time: 14
+May 29, 2022 7:51:07 PM edu.curtin.emergencysim.SimulatorApp startSimulation
+INFO: Time: 15
+May 29, 2022 7:51:07 PM edu.curtin.emergencysim.emergencies.fire.states.LowIntensity update
+INFO: fire low to high at Midtown
+May 29, 2022 7:51:08 PM edu.curtin.emergencysim.SimulatorApp startSimulation
+INFO: Time: 16
+May 29, 2022 7:51:08 PM edu.curtin.emergencysim.emergencies.fire.FireEmergency checkResponse
+INFO: responders arrived at fire Midtown
+May 29, 2022 7:51:08 PM edu.curtin.emergencysim.emergencies.fire.states.HighIntensity checkDamages
+INFO: fire damage at Midtown
+May 29, 2022 7:51:09 PM edu.curtin.emergencysim.SimulatorApp startSimulation
+INFO: Time: 17
+May 29, 2022 7:51:09 PM edu.curtin.emergencysim.emergencies.fire.states.HighIntensity checkDamages
+INFO: fire damage at Midtown
+May 29, 2022 7:51:10 PM edu.curtin.emergencysim.SimulatorApp startSimulation
+INFO: Time: 18
+May 29, 2022 7:51:10 PM edu.curtin.emergencysim.emergencies.fire.states.HighIntensity checkCasualties
+INFO: fire casualty at Midtown
+May 29, 2022 7:51:10 PM edu.curtin.emergencysim.emergencies.fire.states.HighIntensity checkDamages
+INFO: fire damage at Midtown
+May 29, 2022 7:51:11 PM edu.curtin.emergencysim.SimulatorApp startSimulation
+INFO: Time: 19
+May 29, 2022 7:51:11 PM edu.curtin.emergencysim.emergencies.fire.states.HighIntensity checkDamages
+INFO: fire damage at Midtown
+May 29, 2022 7:51:12 PM edu.curtin.emergencysim.SimulatorApp startSimulation
+INFO: Time: 20
+May 29, 2022 7:51:13 PM edu.curtin.emergencysim.SimulatorApp startSimulation
+INFO: Time: 21
+May 29, 2022 7:51:13 PM edu.curtin.emergencysim.emergencies.fire.states.HighIntensity update
+INFO: fire high to low at Midtown
+May 29, 2022 7:51:14 PM edu.curtin.emergencysim.SimulatorApp startSimulation
+INFO: Time: 22
+May 29, 2022 7:51:15 PM edu.curtin.emergencysim.SimulatorApp startSimulation
+INFO: Time: 23
+May 29, 2022 7:51:16 PM edu.curtin.emergencysim.SimulatorApp startSimulation
+INFO: Time: 24
+May 29, 2022 7:51:16 PM edu.curtin.emergencysim.emergencies.fire.states.LowIntensity update
+INFO: fire ended at Midtown
+May 29, 2022 7:51:17 PM edu.curtin.emergencysim.SimulatorApp startSimulation
+INFO: Time: 25
+May 29, 2022 7:51:18 PM edu.curtin.emergencysim.SimulatorApp startSimulation
+INFO: Time: 26
+May 29, 2022 7:51:19 PM edu.curtin.emergencysim.SimulatorApp startSimulation
+INFO: Time: 27
+May 29, 2022 7:51:20 PM edu.curtin.emergencysim.SimulatorApp startSimulation
+INFO: Time: 28
+May 29, 2022 7:51:20 PM edu.curtin.emergencysim.emergencies.fire.FireEmergency checkResponse
+INFO: responders left fire Midtown
+May 29, 2022 7:51:20 PM edu.curtin.emergencysim.emergencies.fire.states.Idle update
+INFO: fire start at Hill Valley
+May 29, 2022 7:51:20 PM edu.curtin.emergencysim.emergencies.fire.states.LowIntensity checkCasualties
+INFO: fire casualty at Hill Valley
+May 29, 2022 7:51:21 PM edu.curtin.emergencysim.SimulatorApp startSimulation
+INFO: Time: 29
+May 29, 2022 7:51:21 PM edu.curtin.emergencysim.emergencies.fire.FireEmergency checkResponse
+INFO: responders arrived at fire Hill Valley
+May 29, 2022 7:51:22 PM edu.curtin.emergencysim.SimulatorApp startSimulation
+INFO: Time: 30
