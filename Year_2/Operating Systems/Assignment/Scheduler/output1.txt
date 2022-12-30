@@ -1,0 +1,8 @@
+Disk Scheduler Simulation: input1.txt
+SSTF: 236
+SCAN: 236
+FCFS: 640
+C_SCAN: 386
+LOOK: 208
+C_LOOK: 326
+
