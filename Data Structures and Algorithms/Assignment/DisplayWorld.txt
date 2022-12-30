@@ -1,0 +1,11 @@
+Script 8.1
+1) load gameofcatz.txt using file input option
+2) press 6 to display World
+3) Manually compare results of World to gameofcatz.txt
+
+Script 8.2
+1) load gameofcatz.txt using file input option
+2) press 6 to display World
+3) Press 2 and enter world.txt
+4) compare world.txt to the one displayed on the screen.
+

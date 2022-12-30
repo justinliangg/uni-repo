@@ -1,0 +1,29 @@
+script 4.1
+1) load gameofcatz.txt using the fileinput option
+2) press 2 to perform node operations, should have find, insert, delete and update
+3) press 1 to find node, enter H, should return Node value: D. 
+4) press 1 to find node, enter X should give error "Node does not exist"
+
+script 4.2
+1) load gameofcatz.txt using the file input option
+2) press 2 to perform node operation
+3) press 2 to insert node. enter A then F should give you an error "node already exists"
+3) press 2 again. enter G and X should should give you an error "X does not exist"
+4) press 2 again. enter X and F. This should work as X node does not exist and
+F is a valid nodeType
+
+script 4.3
+1) load gameofcatz.txt using file input option
+2) press 2 to perform node operation
+3) press 3 to delete node. enter A should successfully delete node A
+4) check this by pressing 1 and enter A to find node, should give "node does not exit"
+5) press 3 again, enter X should give "node does not exist"
+
+script 4.4
+1) load gameofcatz.txt using file input option
+2) press 2 to perform node operation
+3) press 4 to update node. enter A followed by F should be successful
+4) check by pressing 1, enter A and node value should be F
+5) press 4 again, enter A followed by X, should give "Node type does not exist"
+6) press 4 again, enter X followed by F should also give "Node does not exist"
+

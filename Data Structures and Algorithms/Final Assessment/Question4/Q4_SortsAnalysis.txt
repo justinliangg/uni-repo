@@ -1,0 +1,111 @@
+
+//SelectionSort
+
+Theoretical Performance
+- Best Case: O(n^2)
+- Worst Case: o(n^2)
+- Average Case: o(n^2) 
+
+Data Size | Average Case | Worse Case | Best Case
+1000      | 2279.22      | 2687.0     | 2278.67
+10000     | 65370.78     | 58971.67   | 20229.67
+100000    | 5279521.33   | 5279521.33 | 1877210.67
+
+Discussion :
+Average case: Random sorted data
+Worse Case: Descending ordered data
+Best Case: Already sorted data
+
+From the results, it shows that all cases is not scalable with data, increasing
+in time as the data size increases. The results confirms the theoretical 
+performance of selectionSort, in that it is very consistent regardless of the 
+data it is trying to sort. As even with a sorted array given for the best case, 
+it still shows that it is unable to scale well with larger data size, hence 
+still follows the o(n^2) theoretical performance for the best case.
+
+
+==============================================================================
+
+//QuickSort
+
+Theoretical Performance
+- Best Case: O(n*log(n))
+- Worst Case: O(n^2)
+- Average Case: O(n*log(n)) 
+
+Data Size | Average Case | Worse Case | Best Case
+1000      | 201.67       | 207.0      | 193.67
+10000     | 2121.0       | 2841.0     | 1701.67
+100000    | 10756.0      | 10115.67   | 9359.67
+
+Discussion :
+Average case: Random sorted data
+Worse Case: Descending ordered data
+Best Case: Already sorted data
+
+From the results, all cases shows the extremely fast sorting time of quickSort, 
+scaling well with larger data size. This demonstrates its O(n*log(n)) time 
+complexity, aligning with its theoretical performance. 
+
+However the worse case, shows to be better than the theoretical performance. 
+This is due to using a good pivot selection (Median of 3), allowing a 
+consistently good splitting of its arrays. Hence allowing for O(n*log(n)) 
+time complexity even with a descending ordered array, rather than the 
+O(n^2) theoretical performance. This would not be the case if a left most
+pivot was used instead. 
+
+
+===============================================================================
+
+//RadixSort (Was able to only implement LSD, time complexity should be
+             approximately the same to MSD.)
+
+Theoretical Performance
+- Best Case: O(n)
+- Worst Case: O((n+b)*logb(k))
+- Average Case: O((n+b)*logb(k) 
+
+Data Size | Average Case | Worse Case | Best Case
+1000      | 523.67       | 810.3      | 518.67
+10000     | 1466.00      | 2733.67    | 1838.67
+100000    | 12371        | 15760.67   | 15861.67
+
+Discussion :
+Average case: Random sorted data
+Worse Case: Descending ordered data
+Best Case: Already sorted data
+
+Form the results, all cases show similar sorting times. The sorting times closely 
+matches the theoretical performance for worse and average case,scaling well
+with larger data size, however not for the best case. This is because for it be 
+a linear sorting algorithm, the base used for the radixSort has to match the 
+number of elements in the array. Therefore since I have only used base 10, 
+I would not be able to reach the best case theoretical performance. 
+
+
+===============================================================================
+
+//Inbuilt Sort
+
+Theoretical Performance
+- Best Case: O(n*log(n))
+- Worst Case: O((n^2)
+- Average Case: O(n*log(n)) 
+
+Data Size | Average Case | Best Case  | Worse case
+1000      | 276.33       | 356.7      | 21.6
+10000     | 1280.33      | 989.33     | 221
+100000    | 8887.67      | 15760.67   | 871.6
+
+Discussion :
+Average case: Random sorted data
+Worse Case: Already sorted data.
+Best Case: Nearly Sorted data
+
+From the java docs, the inbuilt java sort uses a dual-pivot quicksort algorithm.
+The average case is the only case that matches its theoretical performance.
+Showing that it is scalable hence the O(n*log(n)) time complexity. However,
+I am unsure why the other cases does not correlate with the theoretical performance
+of a dual-pivot quicksort algorithm. The worse case should
+be when it is working on an already sorted arrays, however it runs the fastest
+out of the other data sets. 

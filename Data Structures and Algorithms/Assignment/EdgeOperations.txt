@@ -1,0 +1,34 @@
+Script 5.1
+1) load gameofcatz.txt using the file input option
+2) press 3 for edge operations
+3) press 1 to find edge. Enter A then B, should give Edge Type: - and EdgeWeight: 1
+4) press 1 again. Enter A then C, should give "edge does not exist"
+
+Script 5.2
+1) load gameofcatz.txt using the file input option
+2) press 3 for edge operations
+3) press 2 to add edge. Enter A then C then - should be successful
+4) check this by pressing 1. Enter A then C.
+5) press 2 again. Enter A then X then - should give error. because x does not exist.
+6) press 2 again, Enter A then D then X should give error "Edge type does not exist".
+
+Script 5.3
+1) load gameofcatz.txt using file input option
+2) press 3 for edge operations
+3) press 3 to remove edge. Enter A then B. Should be successful
+4) check by pressing 1 and entering A then B. Should be gone.
+5) press 3 again. Enter A then X should be unsuccessful, edge does
+not exist.
+
+Script 5.4
+1) load gameofcatz.txt using file input option
+2) press 4 then press 4, enter X then 3. Press 5 to Exit to main menu
+3) press 3 for edge operations
+4) press 4 to update edge. Enter A then B then X, should be succesful
+4) check by pressing 1 and entering A then B. should display new edge type.
+5) press 3 again. Enter A then X then -should be unsucessful, edge does
+not exist.
+
+
+
+

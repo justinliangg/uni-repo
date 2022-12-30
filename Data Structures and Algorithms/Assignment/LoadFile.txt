@@ -1,0 +1,28 @@
+Script 3.1
+1) enter interactive mode
+2) press 1 for file input
+3) press 1 again to input text file
+4) enter abcd should prompt you to enter a .txt file
+5) enter abcd.txt should return you to menu with message "file not found"
+
+script 3.2
+1) enter interactive mode
+2) press 1 for file input
+3) press 1 again to input text file
+4) enter gameofcatz.txt 
+5) should diplay "file read successful"
+6) press 5 should display adjacency matrix of graph, check if connections correct
+7) press 6 to display world. Should display - D F T  as node types.
+with 6 -, 1 D, 2 F, 1 T for nodes and 36 - for edges. A and F should be the
+start and end.
+
+script 3.3
+1) enter mode and press 1 for file input
+2) press 1 again to input text file and input gameofcatz.txt
+3) press 10 to save serialized file.
+4) press 1 followed by 2 to read in a serialized file
+5) read the same serialized file you saved previously.
+6) press 5 and 6 and compare display with what you got for the text file
+version.
+
+

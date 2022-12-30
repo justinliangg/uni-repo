@@ -1,0 +1,14 @@
+Script 7.1
+1) load gameofcatz.txt using load file input
+2) press 5
+3) Make graph by hand and compare to the graph displayed.
+
+Script 7.2
+1) load gameofcatz.txt using load file input
+2) press 5 followed by 1
+3) enter graph.txt
+4) check that file out matches displayed graph.
+
+
+
+

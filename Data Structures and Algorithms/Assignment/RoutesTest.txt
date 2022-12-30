@@ -1,0 +1,21 @@
+Script 10.1
+1) Load into interactive mode
+2) press 9 to display routes, should show no routes generated.
+3) press 8 to generate routes.
+4) press 9 again to display, should show no routes generated again
+due to no input file.
+5) now load gameofcatz.txt using load input file 
+6) press 8 to generate routes.
+7) press 9 to display routes.
+8) should only display 10 routes. Manually check that the routes
+corresponds to their cost.
+
+Script 10.2
+1) Load gamoefcatz.txt using load input file
+2) press 8 to generate routes
+3) press 9 to display routes
+4) press 1 and enter routes.txt to save file.
+5) first 10 routes in routes.txt should match the one displayed on
+screen. There should also be 108 routes in total.
+
+

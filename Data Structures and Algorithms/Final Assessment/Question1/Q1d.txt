@@ -1,0 +1,20 @@
+Question 1c)
+
+For mergesort
+-The max depth of the recursion would be approximately log2(100) levels as you
+half the array size by 2 at each level, you will reach the end after log2(100) splits.
+-The number of function calls would be (2n - 1) + (n - 1) + (1 if you include mergesort). 
+As number of times m-rec is called is 2n - 1 and number of times merge is 
+called is n - 1. Therfore number of function calls for an array of 100 elements
+would be 298 or 299 ( if you include mergesort() ).
+
+
+For quicksort with leftmost pivot
+-The max depth of recursion would be be 100 levels for an array of 100 elements. 
+As it does not split the array at all, it will have to check each element 
+individually, therefore recusion depth of 100 for an array of 100 elements.
+
+-The number of function calls is (2n - 1) + (n - 1) + (1 if you include quicksort).
+As number of times qsort_rec is called is 2n - 1 and number of times dopart 
+is called is n - 1. Therefore number of function calls for an array of 100 elements
+is 298 or 299 ( if you include quicksort() ).

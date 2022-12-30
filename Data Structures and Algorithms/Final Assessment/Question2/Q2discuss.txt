@@ -1,0 +1,49 @@
+Question 2a)
+
+- Binary search tree
+First find the node to delete. Check how many childrens it has.
+If no children, just remove the reference to that node
+If 1 children, return the reference of the child node to the parent of node to delete.
+If 2 children, find a successor, which is the smallest key in the right sub tree. 
+return the reference of the successor to the parent of node to delete.
+
+
+-Red-Black tree
+Perform regular binary search tree deletion.
+x = node to be deleted 
+
+if no children and x is a red node, no changes.
+if no children and x is a black node, assign the parent of the node to be
+deleted as a black node. 
+
+if 1 children and x is a red node, no changes.
+if 1 children and x is a black node, change the colour of the child to black
+
+if 2 children and x is a red node, no changes.
+if 2 children and x is a black node, change the colour of replacement to
+black. 
+
+
+-2-3-4 tree and B-tree
+
+x = node to be deleted 
+Look for where the x might be, and checking about how many other keys are 
+in its block.
+
+If at least 2 keys in the block, just delete x.
+
+If only one key and it is a leaf node 
+-if its sibling has at least two, replace the parent with a sibling and 
+move the parent down.
+-if sibling only has one, move the parent down and merge with the sibling,
+and then remove x.
+
+If x is a parent node with children, 
+-if has at least 2 left childs, replace x with the largest child.
+-else if it has at least 2 right childs, replace x with the smallest child.
+-left and right child only have one key, just merge the left and right and
+delete x.
+
+references: 
+Used for deleting a node in 2-3-4 tree.
+https://azrael.digipen.edu/~mmead/www/Courses/CS280/Trees-2-3-4-delete.html

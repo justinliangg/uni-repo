@@ -1,0 +1,11 @@
+script 2.1
+1) enter a random file that doesnt exist.
+2) should display "File Not Found" error.
+
+script 2.2
+1) java gameofcatz -s gameofcatz.txt test.txt
+2) should write to test.txt
+3) routes given should start with A and ends with J, and in ascending order.
+Check by going through graph by hand and calculate cost.
+
+

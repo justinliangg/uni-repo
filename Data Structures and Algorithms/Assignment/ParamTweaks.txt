@@ -1,0 +1,36 @@
+Script 6.1
+1) load gameofcatz.txt using the load file input option
+2) press 4
+3) press 1, enter F then 10. Should be successful
+4) check this by pressing 5 and returning to main menu
+5) press 2 then 1 then G. F should be 10 now.
+6) press 5 to return to main menu again
+7) press 4 then 1. enter X then 10 should give an error." Node Type does not exist"
+
+Script 6.2
+1) load gameofcatz.txt using the load file input option
+2) press 4 followed by 2 then enter - followed by 10, should be
+successful
+3) check this by press 5 and pressing 5 again to display graph.
+4) Should show 10 for the edge weights.
+5) go back by entering 2, then 4.
+6) enter 2, followed by X then 10. Should fail, as X edge type does
+not exist.
+
+Script 6.3
+1) load gameofcatz.txt using the load file input option
+2) press 4 followed by 3 then enter X then 10. Should pass.
+3) check this by pressing 3 again, followed by X then 10. Should fail
+as it already exists.
+4) can confirm again by pressing 5 followed by 6. Should be able to 
+see new node type.
+
+Script 6.4
+1) load gameofcatz.txt using the load file input option
+2) press 4 followed by 4 then enter T followed by 10. Should pass.
+3) check this by pressing 4 again, then enter T followed by 10.
+Should fail, showing T already exists.
+4) can check again by pressing 5 then 6 to display World. Should be able to see new edge type there.
+
+
+

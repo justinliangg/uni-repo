@@ -1,0 +1,31 @@
+Script 9.1
+1) load gameofcatz.txt using load input file
+2) press 7 to change targets
+3) press 1 to change start
+4) enter C, should change successfully 
+5) check this by pressing 6 to display World
+6) start should be C now.
+7) Go back to main menu and press 7 again.
+8) press 1 to change start and enter X
+9) X should fail as it does not exist.
+
+Script 9.2
+1) load gameofcatz.txt using load input file
+2) press 7 to change targets
+3) press 2 to add target
+4) enter I, should be succesful
+5) check this by pressing 6 to display world.
+6) should show that I is a target
+7) go back to main menu and press 7 again.
+8) press 2 to add target
+9) enter X, should fial because X does not exist as a node.
+
+Script 9.3
+1) load gameofcatz.txt using load input file
+2) press 7 to change targets
+3) press 3 to remove target
+4) enter X, should fail as X does not exist in the target list.
+5) now go back by pressing 7 then 3 again.
+6) enter J, should be successful.
+7) check this by going back to menu, display world. Should have 
+nothing in target list.

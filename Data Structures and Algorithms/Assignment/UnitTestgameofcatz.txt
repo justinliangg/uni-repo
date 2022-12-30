@@ -1,0 +1,19 @@
+script 1.1
+1) run java gameofcatz
+2) should display usage()
+
+script 1.2
+1)run java gameofcatz -i
+2)Should display the interactive menu 
+
+script 1.3
+1) run java gameofcatz -s
+2) should again display usage()
+
+script 1.4
+1) run java gameofcatz -s inputfile
+2) should display usage()
+
+script 1.4
+1) run java gameofcatz -s inputfile outputfile
+2) will start running mode.

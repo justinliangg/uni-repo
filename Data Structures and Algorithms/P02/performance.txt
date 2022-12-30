@@ -1,0 +1,37 @@
+Performance for Factorial and Fibonacci Functions
+
+For Factorial Function
+- The function performed quickly and accurately from 0 - 20 for n
+- However past number 21, the numbers became inaccurate and some numbers
+were negative
+- This is probably due to the number of bit that can be stored inside the 
+long data, hence removing the sign bit at the front to accomodate for more 
+values.
+
+For the Fibonacci Function
+- The fibonacci function performed quickly up until when n = 45.
+- As the integer n increased past 45, the time taken to compute got considerably
+longer.
+- This is due to the inefficiency when using recursion in calculating the
+Fibonacci sequence. As due to the recursion formula, some calculations are 
+repeated twice. As n grows larger, the number of duplicate calculations
+increases too. Hence increasing the computation time.
+- The max number for n is 94, as anything above that the answer becomes 
+inaccurate due to not having enough bits in the long data type.
+
+For the GCD Function
+- The GCD Function is also very quick, almost the same computation times as
+Factorial().
+- Since it looks for the common denominator, the output does not get very large.
+- For the input, it will only take digits up to 2147483647 and does not take in negative numbers
+
+For the NumberConversion
+-The NumberConversion function is still quick compared to Fibonacci, however 
+much slower compared to Factorial() and GCD().
+-This is most probably due the case statements requiring extra computation,
+increasing the computing time..
+-Since output is a string, the output data can be as large as it wants
+-However, the input is an integer, so it can only take values up to 2147483647.
+
+All the functions except for fibonacci had constant computing times for 
+increasing numbers of n. This due to having no duplicate calculations
