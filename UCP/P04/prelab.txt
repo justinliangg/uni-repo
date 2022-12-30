@@ -1,0 +1,79 @@
+1a)
+array of integers, length of array = 14
+
+1b)
+array of doubles with numbers 3.3 0.0 1.1 2.2 inside
+
+1c)
+2d array of floats with 5 rows and 10 columns
+
+1d)
+2d int array with 10 rows
+
+1e)
+2d void array with 3 rows 4 columns
+
+1f)
+array of chars initialised as hello
+
+1g)
+array of chars initialised as hello but can only be read
+cannot be modified.
+
+2a)
+a = 1
+b = 55
+
+
+3
+a)
+value in the 3rd row and 2nd column
+
+b)
+memory address of the first row
+
+c)
+memory address of the first element in row 2
+
+d)
+memory address of the third row
+
+e)
+memory address of the third row first element
+
+f)
+memory address of the third row second element
+
+g)
+getting the value inside the 3rd row 2nd element
+
+h)
+getting the value of the 2nd row 3rd element.
+
+i)
+1st row 6th element
+
+j)
+gets the memory address of the first element in the 4th row
+
+
+4a)
+(int*) malloc(25 * sizeOf(int))
+
+4b)
+(float**) malloc(25 * sizeOf(*float))
+
+4c)
+char** x = malloc(25* sizeOf(*char))
+for(int i = 0; i < 25; i++)
+{
+    x[i] = malloc(15 * sizeOf(char))
+}
+
+5a)
+pointer to an array of ints is a pointer to a pointer. while a pointer to 
+the first element is onyl a pointer to an integer.
+
+5b)
+the null terminating character?
+

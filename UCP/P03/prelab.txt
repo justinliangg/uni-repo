@@ -1,0 +1,18 @@
+1a)look for marvellous.h in a predefined standard library directory
+1b)look for marvellou.h in the same directory
+1c)Everytime LENGTH is used, it will be swapped to 100 before compiling.
+1d)Everytime CUBE with input for x is used, it will swap to x^3
+1e)x + x^3 + x^6
+1f)would not work
+1g)
+
+2a) as global variables can make code harder to read due to high coupling. 
+Can be accessed from every function and across different files
+2b)the function would not be able to be accessed by other files. 
+
+3a)database.h, util.h.
+3b)database.h, util.c, interface.c, main.c, database.c
+3c)main.o, database.o, util.o and interface.o
+3d)main.o and database.o
+3e)all 4 .o files
+3f)util.o

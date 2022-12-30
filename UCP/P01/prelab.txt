@@ -1,0 +1,20 @@
+Question 1
+1a) Gets a number from user
+    Number has to be between 10 and 0, else print out of range
+    if number is 5 print correct
+    anything else print wrong 
+
+1b) get user input for count(int), count up to that number  
+   you could replace the while loop with a for loop. 
+
+1c) gets two integer from user store it in a and b seperately.
+    c = (a + b) x (a - b)
+    print c to user.
+
+2)
+a) no forward declarations
+b) 2,3,4,5 has to have forward declarations
+c) no forward declarations
+d) 2,3,4 has to have forward declarations
+e) 5 has to have forward declaration
+
