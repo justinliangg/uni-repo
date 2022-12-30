@@ -1,0 +1,63 @@
+
+Criteria 2) 
+- Array of MazeObjects
+Have used an array for the grid mainly due to its constant access time which was used quite often in my Movement class.
+
+- Map for ObjectTypes and Movements
+Used mainly for the key value pair system in a Map, which allowed access to the instance of the ObjectType and Movement subclasses using a key.
+
+- List to return from getTypes() method in MazeObject interface.
+Used a list as unsure how many types would be decorated onto the MazeObject, hence a dynamic container like a list was used.
+
+
+- List to store NonFatalErrors
+Again number of NonFatalErrors were not known in advance, hence a dynamic container was used.
+
+
+
+Criteria 3)
+- MazeObject Interface
+Used it to be made the type for the grid array, it also utilises the decorator pattern. Called it MazeObject as it overarches all the entities in the game, even empty spaces. Sort of like the base object in Java.
+
+getTypes() method name is used as it is used to get the different "types" of maze objects on that grid space.
+
+
+-MazeMap Class
+Constructs the map after reading the input file.
+
+
+-MazeGame Class
+Controls the running of the game, including player movement and processing the information on each maze object.
+
+
+-ObjectType Abstract Class
+The subclasses that extends from ObjectType decorates the MazeObject with a specific type based on the name of the subclass.
+
+-Movement Abstract Class
+Controls the changing of the player's coordinates based on move specified. 
+
+
+
+Criteria 4)
+-NonFatalException
+Used this exception for when the input file has non fatal errors as described in the specification sheet. Would catch this exception inside the while loop of the file reading part and then add the message of the exception inside the nonFatalErrors list to display to the user later.
+
+-FileFormatException
+Used this exception for when the input file contains any line that deviates from the file format. Only caught this exception in main to stop continuation of the game.
+
+--Logging 
+Have used info level logs at each crucial point of the game and fine level logs at both insertion of the maze objects and coordinates of player after each movement. Done that so that I can turn on fine level logs only when more info is needed to debug the program so that it does not cluster the log file when it is not needed. Have also tried to not use as many log function calls as well as it reduces the readability of the codebase, hence only adding them at crucial points of the game. 
+
+
+Criteria 5)
+Used template pattern for the Movement, ObjectType, Key and Door classes as their respective subclasses all shared similar algorithms other than a few lines of code. By using the template pattern, I was able to reduce the amount of repeated code by abstracting those repeated areas in the abstract class and implementing the "hooks" for the different parts inside the subclasses instead. This enabled maintanability of the code if any changes were needed to be made. 
+
+In the case of the ObjectType class, it also decoupled the interaction between ObjectType and MazeMap. As each subclasses were created to decorate a specific MazeObject type which was done in MazeMap, if it was not abstracted out into ObjectType, MazeMap would be coupled with all of the subclasses. Now it only has to know about ObjectType and does not care about any of the other subclasses 
+
+
+
+Criteria 6)
+Have used the decorator pattern to decorate each MazeObject in the array of the maze. By initialising all the grid spaces with EmptySpace first, I can then decorate each EmptySpace with the other ObjectTypes specified in the input file. This enabled me to add extra maze object types on top of a single MazeObject type, like adding different keys and messages on top of each other. 
+
+Using the decorator pattern can also allow extensibility of the game, as adding additional maze object types into the game only requires just creating a new subclass.
+

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd" version="6.43.0" timestamp="2022-03-25T15:13:15.350">
+<file name="/home/justin/Documents/Uni/Year 2/Sem 1/OOSE/Practicals/Prac 3/worksheet1_imageviewer_java/src/main/java/MainWindow.java">
+<violation beginline="107" endline="107" begincolumn="45" endcolumn="49" rule="UnusedFormalParameter" ruleset="Best Practices" package="edu.curtin.imageviewer" class="MainWindow" method="prevBtnHandler" variable="event" externalInfoUrl="https://pmd.github.io/pmd-6.43.0/pmd_rules_java_bestpractices.html#unusedformalparameter" priority="3">
+Avoid unused method parameters such as 'event'.
+</violation>
+<violation beginline="121" endline="121" begincolumn="45" endcolumn="49" rule="UnusedFormalParameter" ruleset="Best Practices" package="edu.curtin.imageviewer" class="MainWindow" method="nextBtnHandler" variable="event" externalInfoUrl="https://pmd.github.io/pmd-6.43.0/pmd_rules_java_bestpractices.html#unusedformalparameter" priority="3">
+Avoid unused method parameters such as 'event'.
+</violation>
+</file>
+</pmd>

@@ -1,0 +1,132 @@
+Apr. 14, 2022 7:37:17 PM edu.curtin.maze.Main main
+INFO: Initialising game configs
+Apr. 14, 2022 7:37:17 PM edu.curtin.maze.Main main
+INFO: Retrieving file name from user
+Apr. 14, 2022 7:37:22 PM edu.curtin.maze.Main main
+INFO: Initialising maze map
+Apr. 14, 2022 7:37:22 PM edu.curtin.maze.MazeMap createMazeStructure
+INFO: Created maze array 11x29
+Apr. 14, 2022 7:37:22 PM edu.curtin.maze.MazeMap createMazeStructure
+INFO: Inserting objects into the array
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted DV at [1, 5]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted DV at [1, 25]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted DV at [5, 21]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted DV at [9, 25]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted DH at [9, 25]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted DH at [7, 9]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted DH at [9, 9]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted M at [7, 9]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted WV at [3, 5]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted WV at [3, 9]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted WV at [5, 9]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted WV at [7, 9]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted WV at [7, 13]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted WV at [9, 13]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted WH at [3, 5]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted WH at [5, 5]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted WH at [7, 1]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted WH at [7, 5]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted WH at [9, 5]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted S at [3, 13]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted M at [3, 13]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted E at [3, 25]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted M at [1, 25]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted E at [7, 5]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted K at [7, 5]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted M at [7, 5]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted K at [3, 17]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted K at [3, 17]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted M at [3, 17]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted M at [3, 17]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted K at [5, 5]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted K at [7, 21]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted K at [5, 25]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted K at [5, 25]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted K at [5, 25]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted M at [5, 25]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted M at [5, 25]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted K at [3, 5]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted K at [3, 5]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted K at [3, 5]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted K at [3, 5]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted K at [3, 5]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted M at [3, 5]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted WV at [3, 17]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted WV at [3, 21]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted WV at [7, 21]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted WV at [3, 25]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted WV at [5, 25]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted WV at [7, 25]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted WH at [7, 13]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted WH at [3, 13]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted WH at [3, 17]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted WH at [9, 17]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted WH at [9, 21]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.ObjectType insert
+FINE: Inserted WH at [5, 25]
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.Main main
+INFO: Starting game
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.MazeGame run
+INFO: Placed player at starting position
+Apr. 14, 2022 7:37:23 PM edu.curtin.maze.MazeGame run
+INFO: User controlling movement of player
+Apr. 14, 2022 7:37:25 PM edu.curtin.maze.Movement move
+FINE: Player coordinates: [5, 14]
+Apr. 14, 2022 7:37:29 PM edu.curtin.maze.Movement move
+FINE: Player coordinates: [5, 18]
+Apr. 14, 2022 7:37:31 PM edu.curtin.maze.Movement move
+FINE: Player coordinates: [3, 18]

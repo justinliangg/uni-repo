@@ -1,0 +1,38 @@
+Apr. 04, 2022 7:48:57 PM edu.curtin.matheval.ExprParser parse
+INFO: Start of parse method
+Apr. 04, 2022 7:48:57 PM edu.curtin.matheval.ExprParser parseAdd
+INFO: Start of parseAdd method, Tokens: [2, +, x, ), )]
+Apr. 04, 2022 7:48:57 PM edu.curtin.matheval.ExprParser parseMul
+INFO: Start of parseMul method, Tokens: [2, +, x, ), )]
+Apr. 04, 2022 7:48:57 PM edu.curtin.matheval.ExprParser parsePrimary
+INFO: Start of parsePrimary, Tokens: [2, +, x, ), )]
+Apr. 04, 2022 7:48:57 PM edu.curtin.matheval.ExprParser parsePrimary
+INFO: In default case
+Apr. 04, 2022 7:48:57 PM edu.curtin.matheval.ExprParser parseMul
+INFO: Current Tokens: [+, x, ), )]
+Apr. 04, 2022 7:48:57 PM edu.curtin.matheval.ExprParser parseMul
+INFO: In default case
+Apr. 04, 2022 7:48:57 PM edu.curtin.matheval.ExprParser parseAdd
+INFO: Current Tokens: [+, x, ), )]
+Apr. 04, 2022 7:48:57 PM edu.curtin.matheval.ExprParser parseAdd
+INFO: In + case
+Apr. 04, 2022 7:48:57 PM edu.curtin.matheval.ExprParser parseMul
+INFO: Start of parseMul method, Tokens: [x, ), )]
+Apr. 04, 2022 7:48:57 PM edu.curtin.matheval.ExprParser parsePrimary
+INFO: Start of parsePrimary, Tokens: [x, ), )]
+Apr. 04, 2022 7:48:57 PM edu.curtin.matheval.ExprParser parsePrimary
+INFO: In x case
+Apr. 04, 2022 7:48:57 PM edu.curtin.matheval.ExprParser parsePrimary
+INFO: End of x case
+Apr. 04, 2022 7:48:57 PM edu.curtin.matheval.ExprParser parseMul
+INFO: Current Tokens: [), )]
+Apr. 04, 2022 7:48:57 PM edu.curtin.matheval.ExprParser parseMul
+INFO: In default case
+Apr. 04, 2022 7:48:57 PM edu.curtin.matheval.ExprParser parseAdd
+INFO: End of + case
+Apr. 04, 2022 7:48:57 PM edu.curtin.matheval.ExprParser parseAdd
+INFO: Current Tokens: [), )]
+Apr. 04, 2022 7:48:57 PM edu.curtin.matheval.ExprParser parseAdd
+INFO: In default case
+Apr. 04, 2022 7:48:57 PM edu.curtin.matheval.Main main
+INFO: Error!Missing opening brackets!
